@@ -17,16 +17,26 @@ window.Dil = (() => {
   };
   let lang = null;
   try { lang = localStorage.getItem("er-lang"); } catch {}
-  if (!LANGS.some(([k]) => k === lang)) lang = "tr";
+  // ilk ziyarette: tarayıcının dili (ör. "pt-BR" → pt); desteklenmiyorsa İngilizce
+  const has = (k) => LANGS.some(([x]) => x === k);
+  if (!has(lang)) lang = (navigator.languages || [navigator.language || ""]).map((l) => String(l).toLowerCase().split("-")[0]).find(has) || "en";
+  document.documentElement.lang = lang;
   const subs = [];
   let box = null;
+  // aile/uygulama durumu: dosyalarda Türkçe yazılır, sayfada seçili dilde görünür
+  const STATUS = {
+    "Yayında": { en: "Available", de: "Verfügbar", fr: "Disponible", es: "Disponible", it: "Disponibile", pt: "Disponível", pl: "Dostępne", ru: "Доступно", ja: "公開中", zh: "已发布", ko: "출시됨" },
+    "Yakında": { en: "Coming soon", de: "Demnächst", fr: "Bientôt", es: "Próximamente", it: "Prossimamente", pt: "Em breve", pl: "Wkrótce", ru: "Скоро", ja: "近日公開", zh: "即将推出", ko: "출시 예정" },
+    "Beta": { ru: "Бета", ja: "ベータ", zh: "测试版", ko: "베타" },
+  };
 
   // { tr: "...", en: "..." } biçimindeki metinden seçili dili seç; düz metni olduğu gibi döndür
-  const pick = (v) => (v && typeof v === "object" && !Array.isArray(v) ? v[lang] ?? v.tr ?? v.en ?? Object.values(v)[0] ?? "" : v ?? "");
+  const pick = (v) => (v && typeof v === "object" && !Array.isArray(v) ? v[lang] ?? v.en ?? v.tr ?? Object.values(v)[0] ?? "" : v ?? "");
 
   function set(l) {
     if (l === lang) return;
     lang = l;
+    document.documentElement.lang = l;
     try { localStorage.setItem("er-lang", l); } catch {}
     sync();
     subs.forEach((f) => f(l));
@@ -40,7 +50,7 @@ window.Dil = (() => {
     if (tx) tx.textContent = BACK[lang];
   }
 
-  // menüyü ve geri düğmesinin yazısını detay görünümüne bir kez yerleştirir
+  // detay sayfasının geri düğmesine dilin "Geri"si yazılır
   function mount(view) {
     const back = view.querySelector(".back");
     if (back && !back.querySelector(".rq-back-tx")) {
@@ -48,13 +58,18 @@ window.Dil = (() => {
       tx.className = "rq-back-tx";
       back.insertBefore(tx, back.querySelector(".br"));
     }
+    sync();
+  }
+
+  // dil menüsü: her sayfada sağ üstte (sayfa yüklenince bir kez kurulur)
+  function menu() {
     if (!box) {
       box = document.createElement("div");
       box.className = "rq-lang";
       box.innerHTML = `
         <button class="rq-lang-btn glass" aria-haspopup="listbox" aria-expanded="false">${ICON.globe}<b></b>${ICON.chev}</button>
         <ul class="rq-lang-list glass" role="listbox"></ul>`;
-      view.appendChild(box);
+      document.body.appendChild(box);
       const btn = box.querySelector(".rq-lang-btn"), list = box.querySelector(".rq-lang-list");
       const open = (on) => {
         if (on && !list.firstChild) {   // liste ilk açılışta kurulur
@@ -72,6 +87,7 @@ window.Dil = (() => {
     }
     sync();
   }
+  menu();
 
   // Esc önce açık menüyü kapatsın (sayfadan çıkmasın)
   addEventListener("keydown", (e) => {
@@ -83,6 +99,9 @@ window.Dil = (() => {
     get lang() { return lang; },
     pick,
     mount,
+    // { tr: "...", en: "..." } tablosundan seçili dil; yoksa İngilizce, o da yoksa Türkçe
+    tx: (t) => (t && (t[lang] ?? t.en ?? t.tr)) ?? "",
+    status: (s) => (STATUS[s] && STATUS[s][lang]) || s,
     on: (fn) => subs.push(fn),
     date: (s) => { const d = new Date(`${s}T12:00:00`); return isNaN(d) ? s || "" : d.toLocaleDateString(lang, { day: "numeric", month: "long", year: "numeric" }); },
   };

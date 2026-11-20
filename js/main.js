@@ -65,7 +65,7 @@
       </div>
       <span class="node-tag"><b></b><small></small></span>`;
     b.querySelector(".node-tag b").textContent = app.name;
-    b.querySelector(".node-tag small").textContent = app.category;
+    b.querySelector(".node-tag small").textContent = Dil.pick(app.category);
     b.addEventListener("pointerenter", () => { hoverIndex = i; Sfx.hover(panOf(nodes[i].x)); });
     b.addEventListener("pointerleave", () => { if (hoverIndex === i) hoverIndex = -1; });
     b.addEventListener("click", (e) => {
@@ -87,6 +87,31 @@
       focus: 0, lastOp: -1,
     };
   });
+
+/* ---------- Site yazıları (12 dil; seçim: sağ üstteki dil menüsü, js/dil.js) ---------- */
+  const SHELL = {
+    eco: { tr: "Ekosistem", en: "Ecosystem", de: "Ökosystem", fr: "Écosystème", es: "Ecosistema", it: "Ecosistema", pt: "Ecossistema", pl: "Ekosystem", ru: "Экосистема", ja: "エコシステム", zh: "生态", ko: "생태계" },
+    upd: { tr: "Güncellemeler", en: "Updates", de: "Neuigkeiten", fr: "Actualités", es: "Novedades", it: "Novità", pt: "Novidades", pl: "Aktualności", ru: "Новости", ja: "最新情報", zh: "动态", ko: "업데이트" },
+    about: { tr: "Hakkında", en: "About", de: "Über", fr: "À propos", es: "Acerca de", it: "Informazioni", pt: "Sobre", pl: "O nas", ru: "О проекте", ja: "概要", zh: "关于", ko: "소개" },
+    hint: { tr: "Aşağı kaydır:<br>son güncellemeler", en: "Scroll down:<br>latest updates", de: "Nach unten scrollen:<br>Neuigkeiten", fr: "Fais défiler :<br>dernières actualités", es: "Desplázate hacia abajo:<br>últimas novedades", it: "Scorri in basso:<br>ultime novità", pt: "Role para baixo:<br>últimas novidades", pl: "Przewiń w dół:<br>najnowsze aktualności", ru: "Прокрутите вниз:<br>последние новости", ja: "下にスクロール:<br>最新情報", zh: "向下滚动：<br>最新动态", ko: "아래로 스크롤:<br>최신 업데이트" },
+    orbit: { tr: "Yörüngeye dön", en: "Back to orbit", de: "Zurück zum Orbit", fr: "Retour à l'orbite", es: "Volver a la órbita", it: "Torna all'orbita", pt: "Voltar à órbita", pl: "Powrót do orbity", ru: "Назад к орбите", ja: "オービットに戻る", zh: "返回轨道", ko: "궤도로 돌아가기" },
+    kicker: { tr: "Ekosistemde neler oluyor", en: "What's happening in the ecosystem", de: "Was im Ökosystem passiert", fr: "Ce qui se passe dans l'écosystème", es: "Qué pasa en el ecosistema", it: "Cosa succede nell'ecosistema", pt: "O que está acontecendo no ecossistema", pl: "Co dzieje się w ekosystemie", ru: "Что происходит в экосистеме", ja: "エコシステムの最新の動き", zh: "生态中的新鲜事", ko: "생태계 소식" },
+    updTitle: { tr: "Son Güncellemeler", en: "Latest Updates", de: "Neuigkeiten", fr: "Dernières actualités", es: "Últimas novedades", it: "Ultime novità", pt: "Últimas novidades", pl: "Najnowsze aktualności", ru: "Последние новости", ja: "最新情報", zh: "最新动态", ko: "최신 업데이트" },
+    updEnd: { tr: "Hepsi bu kadar — yukarı kaydırıp yörüngeye dönebilirsin.", en: "That's all — scroll up to return to the orbit.", de: "Das war's — nach oben scrollen, um zum Orbit zurückzukehren.", fr: "C'est tout — remonte pour revenir à l'orbite.", es: "Eso es todo — desplázate hacia arriba para volver a la órbita.", it: "È tutto — scorri in alto per tornare all'orbita.", pt: "É tudo — role para cima para voltar à órbita.", pl: "To wszystko — przewiń w górę, aby wrócić do orbity.", ru: "Это всё — прокрутите вверх, чтобы вернуться к орбите.", ja: "以上です — 上にスクロールするとオービットに戻ります。", zh: "就这些 — 向上滚动即可返回轨道。", ko: "이게 전부입니다 — 위로 스크롤하면 궤도로 돌아갑니다." },
+    updNone: { tr: "Henüz bir güncelleme yok. Yeni eserler ve araçlar eklendikçe burada görünecek.", en: "No updates yet. New works and tools will appear here as they're added.", de: "Noch keine Neuigkeiten. Neue Werke und Werkzeuge erscheinen hier, sobald sie hinzukommen.", fr: "Aucune actualité pour l'instant. Les nouvelles œuvres et les nouveaux outils apparaîtront ici.", es: "Aún no hay novedades. Las nuevas obras y herramientas aparecerán aquí.", it: "Ancora nessuna novità. Le nuove opere e i nuovi strumenti appariranno qui.", pt: "Ainda não há novidades. Novas obras e ferramentas aparecerão aqui.", pl: "Brak aktualności. Nowe utwory i narzędzia pojawią się tutaj.", ru: "Пока нет новостей. Новые произведения и инструменты появятся здесь.", ja: "まだ最新情報はありません。新しい作品やツールが追加されるとここに表示されます。", zh: "暂无动态。新作品和工具添加后会显示在这里。", ko: "아직 업데이트가 없습니다. 새 작품과 도구가 추가되면 여기에 표시됩니다." },
+    updDoc: { tr: "Son Güncellemeler", en: "Latest Updates", de: "Neuigkeiten", fr: "Actualités", es: "Novedades", it: "Novità", pt: "Novidades", pl: "Aktualności", ru: "Новости", ja: "最新情報", zh: "最新动态", ko: "업데이트" },
+  };
+  const S = (k) => Dil.tx(SHELL[k]);
+  function applyShell() {
+    document.querySelectorAll("[data-t]").forEach((el) => {
+      const k = el.dataset.t === "updEnd" && !(window.UPDATES || []).length ? "updNone" : el.dataset.t;
+      if (k === "hint") el.innerHTML = S(k); else el.textContent = S(k);
+    });
+    nodes.forEach((n, i) => { n.el.querySelector(".node-tag small").textContent = Dil.pick(APPS[i].category); });
+    if (activeIndex >= 0) fillPanel(APPS[activeIndex]);
+    if (inUpdates) document.title = `${S("updDoc")} · Echo Masterworks`;
+  }
+  Dil.on(applyShell);
 
   /* ---------- Su halkası ---------- */
   // kind: "tap" (dokunma), "big" (merkezden sakin dalga), "drop" (kendiliğinden düşen damla)
@@ -237,7 +262,7 @@
   ];
   const fmtDate = (s) => {
     const d = new Date(`${s}T12:00:00`);
-    return isNaN(d) ? s : d.toLocaleDateString("tr-TR", { day: "numeric", month: "long", year: "numeric" });
+    return isNaN(d) ? s : d.toLocaleDateString(Dil.lang, { day: "numeric", month: "long", year: "numeric" });
   };
   (function renderUpdates() {
     const grid = $("updGrid");
@@ -271,9 +296,6 @@
       }
       grid.appendChild(card);
     });
-    if (!(window.UPDATES || []).length) {
-      document.querySelector(".upd-end").textContent = "Henüz bir güncelleme yok. Yeni eserler ve araçlar eklendikçe burada görünecek.";
-    }
   })();
 
   // sayfa her açıldığında paneller sırayla yükselir; başlık ilk seferde yazılır
@@ -468,12 +490,11 @@
     accentBlob.style.setProperty("--c", app.color);
     $("pLogo").src = app.logo;
     $("pName").textContent = app.name;
-    $("pTagline").textContent = app.tagline;
-    $("pDesc").textContent = app.description;
+    $("pDesc").textContent = Dil.pick(app.description);
     // önizleme etiketleri: kendi sayfası olan aile kendisi üretir (ör. "2 eser"), sonra durum
     const page = app.page && window[app.page];
     const chips = $("pChips"); chips.innerHTML = "";
-    [...(page && page.meta ? page.meta(app) : app.chips || []), app.status].filter(Boolean).forEach((t, k, all) => {
+    [...(page && page.meta ? page.meta(app) : app.chips || []), Dil.status(app.status)].filter(Boolean).forEach((t, k, all) => {
       const s = document.createElement("span"); s.textContent = t;
       if (k === all.length - 1) s.className = "status";
       chips.appendChild(s);
@@ -546,17 +567,17 @@
     if (detailView.style.getPropertyValue("--c") !== app.color) detailView.style.setProperty("--c", app.color);
     detailView.classList.toggle("is-white", isWhite(app.color));
     $("dLogo").src = app.logo; $("dLogo").alt = app.name;
-    $("dCode").textContent = `${app.code} · ${app.category}`;
+    $("dCode").textContent = `${app.code} · ${Dil.pick(app.category)}`;
     $("dName").textContent = app.name;
     $("dTagline").textContent = app.tagline;
-    $("dDesc").textContent = app.description;
+    $("dDesc").textContent = Dil.pick(app.description);
     // kendi sayfası olan aile (ör. Echo Requiem): uzun, kaydırılan içerik
     const page = app.page && window[app.page];
     detailView.classList.toggle("rich", !!page);
     const extra = $("dExtra"); extra.innerHTML = "";
     detailInner.scrollTop = 0;
     const meta = $("dMeta"); meta.innerHTML = "";
-    [app.category, ...(page && page.meta ? page.meta(app) : []), app.status].filter(Boolean).forEach((t) => { const s = document.createElement("span"); s.textContent = t; meta.appendChild(s); });
+    [Dil.pick(app.category), ...(page && page.meta ? page.meta(app) : []), Dil.status(app.status)].filter(Boolean).forEach((t) => { const s = document.createElement("span"); s.textContent = t; meta.appendChild(s); });
     // uygulaması olan ailede özellik kartları, olmayanda tek bir "Yakında" kartı
     const feats = $("dFeatures"); feats.innerHTML = "";
     if (page) {
@@ -661,7 +682,7 @@
       if (wasDetail && id === "guncellemeler") park(updatesView, false);
       document.body.classList.remove("show-detail");
       detailView.setAttribute("aria-hidden", "true");
-      document.title = id === "guncellemeler" ? "Son Güncellemeler · Echo Masterworks" : "Echo Masterworks";
+      document.title = id === "guncellemeler" ? `${S("updDoc")} · Echo Masterworks` : "Echo Masterworks";
       setPage(id === "guncellemeler", wasDetail);
       if (activeIndex < 0) accentBlob.classList.remove("on");
       else accentBlob.style.setProperty("--c", APPS[activeIndex].color);
@@ -899,6 +920,7 @@
   }), 2500);
   const warm = [];   // çözülmüş resimler bellekte kalsın diye tutulur
 
+  applyShell();
   measure();
   park(detailView, true);
   park(updatesView, true);

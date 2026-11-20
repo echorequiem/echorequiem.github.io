@@ -849,8 +849,8 @@ body.show-detail .ambience { visibility: hidden; }
 .view-detail.rich .back #backText { display: none; }
 .rq-back-tx { display: none; }
 .view-detail.rich .rq-back-tx { display: inline; }
-.rq-lang { position: absolute; top: 20px; right: 24px; z-index: 6; }
-.view-detail:not(.rich) .rq-lang { display: none; }
+/* dil menüsü: her sayfada sağ üstte */
+.rq-lang { position: fixed; top: 20px; right: 24px; z-index: 31; }
 .rq-lang svg { fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
 .rq-lang-btn { display: flex; align-items: center; gap: 8px; height: 44px; padding: 0 14px; border-radius: 999px; font-size: 14px; color: var(--text); }
 .rq-lang-btn svg { width: 18px; height: 18px; }
@@ -1175,7 +1175,6 @@ body.has-player .updates { padding-bottom: 190px; }
    UYGULAMA RAFI (Echo Studio): kare paneller + sağdan gelen
    uygulama sayfası. Yerleşim Echo Requiem sayfasıyla aynı.
    ========================================================== */
-.rq-lang { z-index: 8; }
 .ap svg, .ap-page svg { fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
 
 .ap { margin-top: 44px; }

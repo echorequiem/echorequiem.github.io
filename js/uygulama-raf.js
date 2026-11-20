@@ -29,13 +29,14 @@
   };
   const T = Object.fromEntries(Object.entries(RAW).map(([l, a]) => [l, Object.fromEntries(KEYS.map((k, i) => [k, a[i]]))]));
   const t = () => T[Dil.lang] || T.tr;
-  // durum: info.json'da Türkçe yazılır, sayfada seçili dilde görünür
-  const STATUS = {
-    "Yayında": { en: "Available", de: "Verfügbar", fr: "Disponible", es: "Disponible", it: "Disponibile", pt: "Disponível", pl: "Dostępne", ru: "Доступно", ja: "公開中", zh: "已发布", ko: "출시됨" },
-    "Yakında": { en: "Coming soon", de: "Demnächst", fr: "Bientôt", es: "Próximamente", it: "Prossimamente", pt: "Em breve", pl: "Wkrótce", ru: "Скоро", ja: "近日公開", zh: "即将推出", ko: "출시 예정" },
-    "Beta": { ru: "Бета", ja: "ベータ", zh: "测试版", ko: "베타" },
+  // durum (Yayında/Yakında/Beta) seçili dile js/dil.js içinde çevrilir
+  const status = (s) => Dil.status(s);
+  const APPS_N = {
+    tr: (n) => `${n} uygulama`, en: (n) => `${n} app${n > 1 ? "s" : ""}`, de: (n) => `${n} App${n > 1 ? "s" : ""}`,
+    fr: (n) => `${n} application${n > 1 ? "s" : ""}`, es: (n) => `${n} ${n > 1 ? "aplicaciones" : "aplicación"}`, it: (n) => `${n} app`,
+    pt: (n) => `${n} aplicativo${n > 1 ? "s" : ""}`, pl: (n) => `Aplikacje: ${n}`, ru: (n) => `Приложений: ${n}`,
+    ja: (n) => `${n} 個のアプリ`, zh: (n) => `${n} 个应用`, ko: (n) => `앱 ${n}개`,
   };
-  const status = (s) => (STATUS[s] && STATUS[s][Dil.lang]) || s;
   const stClass = (s) => (s === "Yayında" ? "live" : s === "Beta" ? "beta" : "soon");
 
   const ICON = {
@@ -171,7 +172,7 @@
     get sub() { return openId; },
     meta: (app) => {
       const n = (DATA[(app || family || {}).id] || []).length;
-      return n ? [`${n} uygulama`] : [];
+      return n ? [Dil.tx(APPS_N)(n)] : [];
     },
   };
 })();

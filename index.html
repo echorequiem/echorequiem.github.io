@@ -35,9 +35,9 @@
     <span class="hl hl-b" aria-hidden="true"></span>
     <a class="brand" href="#/">Echo Masterworks</a>
     <nav>
-      <a href="#/">Ekosistem</a>
-      <a href="#/guncellemeler">Güncellemeler</a>
-      <a href="#/requiem">Hakkında</a>
+      <a href="#/" data-t="eco">Ekosistem</a>
+      <a href="#/guncellemeler" data-t="upd">Güncellemeler</a>
+      <a href="#/requiem" data-t="about">Hakkında</a>
       <!-- İletişim: gerçek e-posta adresi belli olunca aç
       <a href="mailto:ADRES">İletişim</a> -->
       <div class="themes" role="radiogroup" aria-label="Tema">
@@ -76,7 +76,7 @@
             <rect x="1" y="1" width="14" height="22" rx="7" />
             <circle class="wheel" cx="8" cy="7" r="1.6" />
           </svg>
-          <span>Aşağı kaydır:<br>son güncellemeler</span>
+          <span data-t="hint">Aşağı kaydır:<br>son güncellemeler</span>
           <a class="hint-link" href="#/guncellemeler" aria-label="Son güncellemeler"></a>
         </p>
       </main>
@@ -93,7 +93,6 @@
         <a id="pGo" class="title-row" href="#/">
           <div>
             <h2 id="pName"></h2>
-            <p class="tagline" id="pTagline"></p>
           </div>
           <span class="arrow" aria-label="Detayları gör">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" /></svg>
@@ -110,14 +109,14 @@
         <section class="updates" id="updates" aria-labelledby="updTitle">
           <a class="upd-back" href="#/">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V6M6 11l6-6 6 6" /></svg>
-            Yörüngeye dön
+            <span data-t="orbit">Yörüngeye dön</span>
           </a>
           <header class="upd-head">
-            <span class="label upd-kicker">Ekosistemde neler oluyor</span>
-            <h2 id="updTitle">Son Güncellemeler</h2>
+            <span class="label upd-kicker" data-t="kicker">Ekosistemde neler oluyor</span>
+            <h2 id="updTitle" data-t="updTitle">Son Güncellemeler</h2>
           </header>
           <div class="upd-grid" id="updGrid"></div>
-          <p class="upd-end">Hepsi bu kadar — yukarı kaydırıp yörüngeye dönebilirsin.</p>
+          <p class="upd-end" data-t="updEnd">Hepsi bu kadar — yukarı kaydırıp yörüngeye dönebilirsin.</p>
         </section>
       </div>
     </section>

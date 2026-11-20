@@ -487,8 +487,11 @@
   // ana ekrandaki önizleme panelinin etiketleri
   const meta = () => {
     const has = (k) => WORKS.some((w) => w.dosya[k]);
-    return [`${WORKS.length} eser`, "FLAC · WAV · MP3",
-      [has("nota") && "Nota", has("midi") && "MIDI", WORKS.some((w) => (w.videolar || []).length) && "Video"].filter(Boolean).join(" · ")].filter(Boolean);
+    const n = WORKS.length;
+    const works = Dil.tx({ tr: `${n} eser`, en: `${n} works`, de: `${n} Werke`, fr: `${n} œuvres`, es: `${n} obras`, it: `${n} opere`, pt: `${n} obras`, pl: `Utwory: ${n}`, ru: `Произведений: ${n}`, ja: `${n} 作品`, zh: `${n} 部作品`, ko: `작품 ${n}개` });
+    const video = Dil.tx({ tr: "Video", en: "Video", de: "Video", fr: "Vidéo", es: "Vídeo", it: "Video", pt: "Vídeo", pl: "Wideo", ru: "Видео", ja: "動画", zh: "视频", ko: "영상" });
+    return [works, "FLAC · WAV · MP3",
+      [has("nota") && t().score, has("midi") && "MIDI", WORKS.some((w) => (w.videolar || []).length) && video].filter(Boolean).join(" · ")].filter(Boolean);
   };
   window.Requiem = { render, meta,stopVideos: () => stopVideos() };
 })();
