@@ -80,6 +80,7 @@
       <a class="back ap-back" data-bracket>${ICON.back}<span class="ap-back-tx"></span><span class="br" aria-hidden="true"></span></a>
       <div class="ap-scroll"><div class="ap-inner"></div></div>`;
     view.appendChild(page);
+    page.addEventListener("click", (e) => { const b = e.target.closest(".ap-shot"); if (b) openLb(+b.dataset.k); });
   }
 
   function info(a) {
@@ -129,8 +130,8 @@
         <div class="ap-col">
           ${P(a.aciklama) ? `<div class="rq-block"><h4>${esc(L.about)}</h4><p class="ap-desc">${esc(P(a.aciklama))}</p></div>` : ""}
           ${feats.length ? `<div class="rq-block"><h4>${esc(L.features)}</h4><ul class="ap-feats">${feats.map((f) => `<li>${ICON.check}<span>${esc(f)}</span></li>`).join("")}</ul></div>` : ""}
-          ${a.ekranlar.length ? `<div class="rq-block"><h4>${esc(L.shots)}</h4><div class="ap-shots">${a.ekranlar.map((s) =>
-            `<a href="${esc(s)}" target="_blank" rel="noopener"><img src="${esc(s)}" alt="" loading="lazy"></a>`).join("")}</div></div>` : ""}
+          ${a.ekranlar.length ? `<div class="rq-block"><h4>${esc(L.shots)}</h4><div class="ap-shots">${a.ekranlar.map((s, k) =>
+            `<button class="ap-shot" data-k="${k}" aria-label="${esc(L.shots)} ${k + 1} / ${a.ekranlar.length}"><img src="${esc(s)}" alt="" loading="lazy"></button>`).join("")}</div></div>` : ""}
         </div>
         <aside class="ap-col">
           ${info(a)}
@@ -138,7 +139,86 @@
         </aside>
       </div>`;
     page.querySelector(".ap-scroll").scrollTop = 0;
+    shots = a.ekranlar;
   }
+
+  /* ---------------- Ekran görüntüsü galerisi ----------------
+     Resme tıklayınca sayfanın üstünde açılır. Oklar (klavye, düğmeler ya da
+     parmakla kaydırma) resimler arasında gezer; Esc, ✕ ya da boşluğa
+     tıklamak kapatır. Site içinde kalınır, yeni sekme açılmaz. */
+  const LB = {
+    close: { tr: "Kapat", en: "Close", de: "Schließen", fr: "Fermer", es: "Cerrar", it: "Chiudi", pt: "Fechar", pl: "Zamknij", ru: "Закрыть", ja: "閉じる", zh: "关闭", ko: "닫기" },
+    prev: { tr: "Önceki", en: "Previous", de: "Zurück", fr: "Précédente", es: "Anterior", it: "Precedente", pt: "Anterior", pl: "Poprzedni", ru: "Назад", ja: "前へ", zh: "上一张", ko: "이전" },
+    next: { tr: "Sonraki", en: "Next", de: "Weiter", fr: "Suivante", es: "Siguiente", it: "Successiva", pt: "Próxima", pl: "Następny", ru: "Далее", ja: "次へ", zh: "下一张", ko: "다음" },
+  };
+  let shots = [], at = 0, lb = null, lbFocus = null;
+  function lightbox() {
+    if (lb) return lb;
+    lb = document.createElement("div");
+    lb.className = "lb";
+    lb.setAttribute("role", "dialog");
+    lb.setAttribute("aria-modal", "true");
+    lb.setAttribute("aria-hidden", "true");
+    lb.innerHTML = `
+      <figure class="lb-fig"><img class="lb-img" alt=""></figure>
+      <button class="lb-btn lb-prev"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <button class="lb-btn lb-next"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+      <button class="lb-btn lb-x"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+      <div class="lb-count"></div>`;
+    document.body.appendChild(lb);
+    lb.addEventListener("click", (e) => {
+      if (e.target.closest(".lb-prev")) return go(-1);
+      if (e.target.closest(".lb-next")) return go(1);
+      if (!e.target.closest(".lb-img")) closeLb();   // ✕ ya da boşluk
+    });
+    // parmakla sağa/sola kaydırma
+    let x0 = null, y0 = 0;
+    lb.addEventListener("touchstart", (e) => { x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; }, { passive: true });
+    lb.addEventListener("touchend", (e) => {
+      if (x0 == null) return;
+      const dx = e.changedTouches[0].clientX - x0, dy = e.changedTouches[0].clientY - y0; x0 = null;
+      if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.4) go(dx < 0 ? 1 : -1);
+    });
+    return lb;
+  }
+  function show() {
+    const img = lb.querySelector(".lb-img");
+    img.src = shots[at];
+    lb.querySelector(".lb-count").textContent = `${at + 1} / ${shots.length}`;
+    lb.classList.toggle("single", shots.length < 2);
+    // sıradaki resim önceden yüklensin
+    if (shots.length > 1) { const n = new Image(); n.src = shots[(at + 1) % shots.length]; }
+  }
+  function openLb(k) {
+    lightbox();
+    at = k;
+    lb.querySelector(".lb-x").setAttribute("aria-label", Dil.tx(LB.close));
+    lb.querySelector(".lb-prev").setAttribute("aria-label", Dil.tx(LB.prev));
+    lb.querySelector(".lb-next").setAttribute("aria-label", Dil.tx(LB.next));
+    show();
+    lbFocus = document.activeElement;
+    lb.classList.add("open");
+    lb.setAttribute("aria-hidden", "false");
+    lb.querySelector(".lb-x").focus();
+  }
+  function go(d) { if (shots.length > 1) { at = (at + d + shots.length) % shots.length; show(); } }
+  function closeLb() {
+    if (!lb || !lb.classList.contains("open")) return false;
+    lb.classList.remove("open");
+    lb.setAttribute("aria-hidden", "true");
+    if (lbFocus) lbFocus.focus();
+    return true;
+  }
+  // galeri açıkken tuşlar yalnızca galeriye gider (sayfadan çıkmaz, aile değişmez)
+  addEventListener("keydown", (e) => {
+    if (!lb || !lb.classList.contains("open")) return;
+    if (e.key === "Escape") closeLb();
+    else if (e.key === "ArrowLeft") go(-1);
+    else if (e.key === "ArrowRight") go(1);
+    else return;
+    e.preventDefault(); e.stopImmediatePropagation();
+  }, true);
+  addEventListener("hashchange", () => closeLb());   // tarayıcının geri tuşu da kapatsın
 
   // main.js her adres değişiminde çağırır: sub = uygulama kimliği ya da ""
   function route(sub) {

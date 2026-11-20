@@ -147,18 +147,42 @@
       "surum": "1.0.0",
       "tarih": "2026-11-20",
       "notlar": {
-        "tr": ["İlk kararlı sürüm.", "Echo Studio ailesinin yeni tasarımı: Diapason tasarım dili ve fontu.", "Render öncesi videonun son hali önizlemesi.", "Notalar yerleşerek başlar, silinerek biter.", "Tril ve legato için hareketli parıltı."],
-        "en": ["First stable release.", "New Echo Studio design: the Diapason design language and font.", "Preview of the finished video before rendering.", "The score settles in at the start and wipes away at the end.", "Animated glow for trills and slurs."],
-        "de": ["Erste stabile Version.", "Neues Echo-Studio-Design: die Designsprache und Schrift Diapason.", "Vorschau des fertigen Videos vor dem Rendern.", "Die Noten gleiten am Anfang herein und verschwinden am Ende.", "Animiertes Leuchten für Triller und Bögen."],
-        "fr": ["Première version stable.", "Nouveau design Echo Studio : le langage visuel et la police Diapason.", "Aperçu de la vidéo finale avant le rendu.", "La partition s'installe au début et s'efface à la fin.", "Lueur animée pour les trilles et les liaisons."],
-        "es": ["Primera versión estable.", "Nuevo diseño de Echo Studio: el lenguaje de diseño y la fuente Diapason.", "Vista previa del vídeo final antes de renderizar.", "La partitura entra al principio y se borra al final.", "Brillo animado para trinos y ligaduras."],
-        "it": ["Prima versione stabile.", "Nuovo design Echo Studio: il linguaggio visivo e il font Diapason.", "Anteprima del video finito prima del render.", "Lo spartito entra all'inizio e svanisce alla fine.", "Bagliore animato per trilli e legature."],
-        "pt": ["Primeira versão estável.", "Novo design Echo Studio: a linguagem de design e a fonte Diapason.", "Prévia do vídeo final antes de renderizar.", "A partitura entra no início e se apaga no fim.", "Brilho animado para trinados e ligaduras."],
-        "pl": ["Pierwsza stabilna wersja.", "Nowy wygląd Echo Studio: język projektowy i czcionka Diapason.", "Podgląd gotowego filmu przed renderowaniem.", "Nuty wsuwają się na początku i znikają na końcu.", "Animowana poświata dla tryli i łuków."],
-        "ru": ["Первая стабильная версия.", "Новый дизайн Echo Studio: язык оформления и шрифт Diapason.", "Предпросмотр готового видео до рендера.", "Ноты плавно появляются в начале и исчезают в конце.", "Анимированное свечение трелей и лиг."],
-        "ja": ["最初の安定版。", "Echo Studio の新デザイン：デザイン言語とフォント Diapason。", "レンダー前の完成動画プレビュー。", "楽譜は並んで始まり、消えて終わります。", "トリルとスラーのアニメーション発光。"],
-        "zh": ["首个稳定版本。", "Echo Studio 新设计：Diapason 设计语言与字体。", "渲染前预览最终视频。", "乐谱开头逐一就位，结尾逐一消失。", "颤音与连线的动态发光。"],
-        "ko": ["첫 안정 버전.", "Echo Studio 새 디자인: Diapason 디자인 언어와 글꼴.", "렌더 전 완성 영상 미리보기.", "악보가 자리 잡으며 시작하고 사라지며 끝납니다.", "트릴과 이음줄의 애니메이션 발광."]
+        "tr": [
+          "İlk kararlı sürüm."
+        ],
+        "en": [
+          "First stable release."
+        ],
+        "de": [
+          "Erste stabile Version."
+        ],
+        "fr": [
+          "Première version stable."
+        ],
+        "es": [
+          "Primera versión estable."
+        ],
+        "it": [
+          "Prima versione stabile."
+        ],
+        "pt": [
+          "Primeira versão estável."
+        ],
+        "pl": [
+          "Pierwsza stabilna wersja."
+        ],
+        "ru": [
+          "Первая стабильная версия."
+        ],
+        "ja": [
+          "最初の安定版。"
+        ],
+        "zh": [
+          "首个稳定版本。"
+        ],
+        "ko": [
+          "첫 안정 버전."
+        ]
       }
     }
   ]
