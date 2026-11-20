@@ -1,0 +1,17 @@
+# Yerel araç ayarları (sitede gerekmez)
+.claude/
+.vite/
+node_modules/
+
+# Artık kullanılmayan eski görseller (bilgisayarında duruyor, yayına gitmez)
+assets/app-*
+assets/echo-masterworks-t.png
+assets/echo-masterworks.jpg
+
+# Boş/eski dosyalar
+uret-font.js
+
+# Sistem dosyaları
+Thumbs.db
+desktop.ini
+.DS_Store
