@@ -83,10 +83,10 @@ window.WORKS = [
     "lisans": "CC BY-NC-ND 4.0",
     "aciklama": "",
     "dosya": {
-      "wav": "eserler/op3-out-of-time/Out%20of%20Time_Mastered.wav",
-      "nota": "eserler/op3-out-of-time/Out%20of%20Time_Mastered.pdf",
-      "midi": "eserler/op3-out-of-time/Out%20of%20Time.mid",
-      "kapak": "eserler/op3-out-of-time/Out%20of%20Time_1.1_Mastered.jpg"
+      "wav": "eserler/op3-out-of-time/ses.wav",
+      "nota": "eserler/op3-out-of-time/nota.pdf",
+      "midi": "eserler/op3-out-of-time/midi.mid",
+      "kapak": "eserler/op3-out-of-time/kapak.jpg"
     },
     "boyut": {
       "wav": 43894194,
