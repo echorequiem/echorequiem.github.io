@@ -623,6 +623,7 @@
 
   // adres: #/aile ya da #/aile/alt-sayfa (ör. #/studio/partitura)
   const hashParts = () => decodeURIComponent(location.hash.replace(/^#\/?/, "")).split("/");
+  const HOME_TITLE = document.title;   // index.html başlığı (arama motorları için açıklayıcı)
   function route() {
     const [id, sub = ""] = hashParts();
     const i = APPS.findIndex((a) => a.id === id);
@@ -672,7 +673,7 @@
       if (wasDetail && id === "guncellemeler") park(updatesView, false);
       document.body.classList.remove("show-detail");
       detailView.setAttribute("aria-hidden", "true");
-      document.title = id === "guncellemeler" ? `${S("updDoc")} · Echo Masterworks` : "Echo Masterworks";
+      document.title = id === "guncellemeler" ? `${S("updDoc")} · Echo Masterworks` : HOME_TITLE;
       setPage(id === "guncellemeler", wasDetail);
       if (activeIndex < 0) accentBlob.classList.remove("on");
       else accentBlob.style.setProperty("--c", APPS[activeIndex].color);
