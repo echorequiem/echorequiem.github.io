@@ -1,5 +1,6 @@
 {
-  "ad": "Partitura",
+  "ad": "Eqo Partitura",
+  "eskiKimlikler": ["partitura"],
   "sira": 1,
   "kisa": {
     "tr": "Nota animasyonu",

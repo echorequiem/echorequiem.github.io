@@ -223,7 +223,9 @@
   // main.js her adres değişiminde çağırır: sub = uygulama kimliği ya da ""
   function route(sub) {
     if (!page || !family) return;
-    const a = sub && (DATA[family.id] || []).find((x) => x.id === sub);
+    const list = DATA[family.id] || [];
+    const a = sub && (list.find((x) => x.id === sub) || list.find((x) => (x.eskiKimlikler || []).includes(sub)));
+    if (a && a.id !== sub) { history.replaceState(null, "", `#/${family.id}/${a.id}`); }   // eski adres → yeni adres
     if (a) {
       openId = a.id;
       fill(a);

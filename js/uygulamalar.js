@@ -3,8 +3,11 @@
 window.UYGULAMALAR = {
   "studio": [
     {
-      "id": "partitura",
-      "ad": "Partitura",
+      "id": "eqo-partitura",
+      "ad": "Eqo Partitura",
+      "eskiKimlikler": [
+        "partitura"
+      ],
       "sira": 1,
       "kisa": {
         "tr": "Nota animasyonu",
@@ -143,12 +146,12 @@ window.UYGULAMALAR = {
           "ko": "렌더 전 완성 영상 미리보기, 프로젝트 저장, HD 악보 띠 이미지, 10개 인터페이스 언어"
         }
       ],
-      "simge": "uygulamalar/studio/partitura/simge.svg",
+      "simge": "uygulamalar/studio/eqo-partitura/simge.svg",
       "ekranlar": [
-        "uygulamalar/studio/partitura/ekran1.png",
-        "uygulamalar/studio/partitura/ekran2.png",
-        "uygulamalar/studio/partitura/ekran3.png",
-        "uygulamalar/studio/partitura/ekran4.png"
+        "uygulamalar/studio/eqo-partitura/ekran1.png",
+        "uygulamalar/studio/eqo-partitura/ekran2.png",
+        "uygulamalar/studio/eqo-partitura/ekran3.png",
+        "uygulamalar/studio/eqo-partitura/ekran4.png"
       ],
       "indirmeler": [
         {

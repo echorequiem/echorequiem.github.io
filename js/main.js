@@ -259,7 +259,7 @@
   };
   // Güncelleme kartları (veri: js/updates.js). Sol üstte güncellemenin ait olduğu
   // ailenin logosu, sağ üstte tarih, kalan alanda mesaj. "link" verilmişse kart
-  // oraya götürür (ör. "studio/partitura" → uygulama sayfası). Dil değişince yeniden çizilir.
+  // oraya götürür (ör. "studio/eqo-partitura" → uygulama sayfası). Dil değişince yeniden çizilir.
   function renderUpdates() {
     const grid = $("updGrid");
     grid.innerHTML = "";
@@ -572,7 +572,6 @@
     const feats = $("dFeatures"); feats.innerHTML = "";
     if (page) {
       page.render(extra, app);
-      if (page.route) page.route(sub);   // ör. #/studio/partitura doğrudan açıldıysa
     } else if (app.features && app.features.length) {
       app.features.forEach((f, k) => {
         const d = document.createElement("div");
@@ -600,6 +599,8 @@
     link($("dNext"), APPS[(i + 1) % N], "Sonraki →");
     accentBlob.style.setProperty("--c", app.color);
     document.title = `${app.name} · Echo Masterworks`;
+    // ör. #/studio/eqo-partitura doğrudan açıldıysa alt sayfa da açılır (başlığı da o koyar)
+    if (page && page.route) page.route(sub);
     typeTitle($("dName"), app.name, 55);
   }
 
@@ -621,7 +622,7 @@
     setTimeout(finish, 420);
   }
 
-  // adres: #/aile ya da #/aile/alt-sayfa (ör. #/studio/partitura)
+  // adres: #/aile ya da #/aile/alt-sayfa (ör. #/studio/eqo-partitura)
   const hashParts = () => decodeURIComponent(location.hash.replace(/^#\/?/, "")).split("/");
   const HOME_TITLE = document.title;   // index.html başlığı (arama motorları için açıklayıcı)
   function route() {
