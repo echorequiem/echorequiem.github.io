@@ -49,7 +49,7 @@
     "ko": "Windows 10 또는 11, 64비트(x64) · RAM 4 GB(4K는 8 GB 권장) · 약 120 MB 디스크 공간 + 영상 저장 공간 · 설치 불필요, 단일 파일. Windows on ARM에서는 에뮬레이션으로 실행됩니다."
   },
   "lisans": "MIT",
-  "kaynak": "",
+  "kaynak": "https://github.com/echorequiem/partitura",
   "ozellikler": [
     {
       "tr": "MusicXML (.musicxml, .xml, .mxl) dosyalarını açar; tempo ve tempo değişimlerini dosyadan okur",
