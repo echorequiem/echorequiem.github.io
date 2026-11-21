@@ -15,3 +15,8 @@ uret-font.js
 Thumbs.db
 desktop.ini
 .DS_Store
+
+# Yardımcı araçlar: yalnızca bu bilgisayarda kalır, GitHub'a gönderilmez
+# (site bunlara ihtiyaç duymaz; ürettikleri dosyalar gönderilir)
+araclar/
+*.bat

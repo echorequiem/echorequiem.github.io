@@ -1,0 +1,53 @@
+Echo Masterworks — echorequiem.github.io
+Copyright (c) 2026 Echo Requiem / Echo Masterworks. All rights reserved.
+
+ENGLISH
+
+1. Website code and design
+   The source code, design, layout, text, logos, brand marks and graphics of
+   this website (HTML, CSS, JavaScript and the files in assets/) are the
+   property of Echo Masterworks. All rights reserved.
+   This repository is public only because the website is hosted on GitHub
+   Pages. Being able to read the files does NOT grant any licence: you may not
+   copy, modify, redistribute, republish or reuse any part of the website code
+   or design, in whole or in part, without prior written permission.
+
+2. Music, sheet music and recordings
+   The compositions, recordings, scores (PDF) and MIDI files in eserler/ are
+   shared under the licence stated on each work's page — currently
+   Creative Commons Attribution-NonCommercial-NoDerivatives 4.0
+   (CC BY-NC-ND 4.0, https://creativecommons.org/licenses/by-nc-nd/4.0/).
+   You may download and share them unchanged, for non-commercial purposes,
+   with credit to "Echo Requiem".
+
+3. Third-party components
+   - The Diapason typeface (fonts/) is based on Tinos and is licensed under the
+     SIL Open Font License 1.1 — see fonts/LISANS-OFL.txt.
+   - Eqo Partitura is a separate project with its own MIT licence:
+     https://github.com/echorequiem/eqo-partitura
+
+TÜRKÇE
+
+1. Site kodu ve tasarımı
+   Bu web sitesinin kaynak kodu, tasarımı, yerleşimi, metinleri, logoları,
+   marka işaretleri ve görselleri (HTML, CSS, JavaScript ve assets/ içindeki
+   dosyalar) Echo Masterworks'e aittir. Tüm hakları saklıdır.
+   Bu depo yalnızca site GitHub Pages üzerinde yayınlandığı için herkese
+   açıktır. Dosyaların görülebilmesi HİÇBİR kullanım izni vermez: site kodunun
+   ya da tasarımının herhangi bir bölümü önceden yazılı izin alınmadan
+   kopyalanamaz, değiştirilemez, dağıtılamaz, yeniden yayınlanamaz ve
+   kullanılamaz.
+
+2. Müzik, nota ve kayıtlar
+   eserler/ klasöründeki besteler, kayıtlar, notalar (PDF) ve MIDI dosyaları,
+   her eserin sayfasında belirtilen lisansla paylaşılır — şu an
+   Creative Commons Atıf-GayriTicari-Türetilemez 4.0
+   (CC BY-NC-ND 4.0, https://creativecommons.org/licenses/by-nc-nd/4.0/).
+   "Echo Requiem" adı belirtilerek, ticari olmayan amaçla ve değiştirilmeden
+   indirilebilir ve paylaşılabilir.
+
+3. Üçüncü taraf bileşenler
+   - Diapason yazı tipi (fonts/) Tinos tabanlıdır ve SIL Open Font License 1.1
+     ile lisanslıdır — bkz. fonts/LISANS-OFL.txt.
+   - Eqo Partitura kendi MIT lisansına sahip ayrı bir projedir:
+     https://github.com/echorequiem/eqo-partitura
