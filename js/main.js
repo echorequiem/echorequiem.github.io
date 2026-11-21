@@ -101,6 +101,7 @@
     updNone: { tr: "Henüz bir güncelleme yok. Yeni eserler ve araçlar eklendikçe burada görünecek.", en: "No updates yet. New works and tools will appear here as they're added.", de: "Noch keine Neuigkeiten. Neue Werke und Werkzeuge erscheinen hier, sobald sie hinzukommen.", fr: "Aucune actualité pour l'instant. Les nouvelles œuvres et les nouveaux outils apparaîtront ici.", es: "Aún no hay novedades. Las nuevas obras y herramientas aparecerán aquí.", it: "Ancora nessuna novità. Le nuove opere e i nuovi strumenti appariranno qui.", pt: "Ainda não há novidades. Novas obras e ferramentas aparecerão aqui.", pl: "Brak aktualności. Nowe utwory i narzędzia pojawią się tutaj.", ru: "Пока нет новостей. Новые произведения и инструменты появятся здесь.", ja: "まだ最新情報はありません。新しい作品やツールが追加されるとここに表示されます。", zh: "暂无动态。新作品和工具添加后会显示在这里。", ko: "아직 업데이트가 없습니다. 새 작품과 도구가 추가되면 여기에 표시됩니다." },
     updDoc: { tr: "Son Güncellemeler", en: "Latest Updates", de: "Neuigkeiten", fr: "Actualités", es: "Novedades", it: "Novità", pt: "Novidades", pl: "Aktualności", ru: "Новости", ja: "最新情報", zh: "最新动态", ko: "업데이트" },
   };
+  SHELL.back = { tr: "Geri", en: "Back", de: "Zurück", fr: "Retour", es: "Volver", it: "Indietro", pt: "Voltar", pl: "Wstecz", ru: "Назад", ja: "戻る", zh: "返回", ko: "뒤로" };
   const S = (k) => Dil.tx(SHELL[k]);
   function applyShell() {
     document.querySelectorAll("[data-t]").forEach((el) => {
@@ -109,6 +110,7 @@
     });
     nodes.forEach((n, i) => { n.el.querySelector(".node-tag small").textContent = Dil.pick(APPS[i].category); });
     if (activeIndex >= 0) fillPanel(APPS[activeIndex]);
+    renderUpdates();
     if (inUpdates) document.title = `${S("updDoc")} · Echo Masterworks`;
   }
   Dil.on(applyShell);
@@ -250,53 +252,41 @@
   const homeView = $("homeView");
   const updatesView = $("updatesView");
   const updScroll = $("updScroll");
-  // hafif asimetrik yerleşim: genişlik, dikey kayma ve köşe yuvarlaklığı her panelde farklı
-  const LAYOUT = [
-    { span: 7, shift: 0,   rad: "28px 28px 28px 10px", big: true },
-    { span: 5, shift: 46,  rad: "28px 10px 28px 28px" },
-    { span: 5, shift: 0,   rad: "10px 28px 28px 28px" },
-    { span: 7, shift: 30,  rad: "28px 28px 10px 28px" },
-    { span: 4, shift: 4,   rad: "28px 28px 28px 10px" },
-    { span: 4, shift: 40,  rad: "28px 10px 28px 28px" },
-    { span: 4, shift: 14,  rad: "10px 28px 28px 28px" },
-  ];
+  // tarih rakamlarla (ör. 20.11.2026 / 11/20/2026), seçili dilin biçiminde
   const fmtDate = (s) => {
     const d = new Date(`${s}T12:00:00`);
-    return isNaN(d) ? s : d.toLocaleDateString(Dil.lang, { day: "numeric", month: "long", year: "numeric" });
+    return isNaN(d) ? s : d.toLocaleDateString(Dil.lang, { day: "2-digit", month: "2-digit", year: "numeric" });
   };
-  (function renderUpdates() {
+  // Güncelleme kartları (veri: js/updates.js). Sol üstte güncellemenin ait olduğu
+  // ailenin logosu, sağ üstte tarih, kalan alanda mesaj. "link" verilmişse kart
+  // oraya götürür (ör. "studio/partitura" → uygulama sayfası). Dil değişince yeniden çizilir.
+  function renderUpdates() {
     const grid = $("updGrid");
+    grid.innerHTML = "";
     (window.UPDATES || []).forEach((u, i) => {
       const app = APPS.find((a) => a.id === u.app);
-      const lay = LAYOUT[i % LAYOUT.length];
-      const card = document.createElement("article");
-      card.className = `upd-card glass${lay.big ? " big" : ""}${app ? " has-link" : ""}${app && isWhite(app.color) ? " is-white" : ""}`;
-      card.setAttribute("data-bracket", "");
-      // çerçevenin her köşesi panelin kendi köşe yarıçapını izlesin
-      const [tl, tr, brc, bl] = lay.rad.split(" ");
-      card.style.cssText = `--span:${lay.span};--shift:${lay.shift}px;--rad:${lay.rad};--d:${((i % 3) * 0.08).toFixed(2)}s` +
-        `;--r-tl:${tl};--r-tr:${tr};--r-brc:${brc};--r-bl:${bl}` +
-        (app ? `;--c:${app.color}` : "");
+      const href = u.link ? `#/${u.link}` : app ? `#/${app.id}` : "";
+      const card = document.createElement(href ? "a" : "article");
+      card.className = `upd-card${href ? " has-link" : ""}${app && isWhite(app.color) ? " is-white" : ""}${inUpdates ? " in" : ""}`;
+      if (href) card.href = href;
+      card.style.cssText = `--d:${((i % 3) * 0.08).toFixed(2)}s` + (app ? `;--c:${app.color}` : "");
       card.innerHTML = `
-        <div class="upd-top"><span class="upd-date"></span><span class="upd-tag"></span></div>
-        ${app ? `<div class="upd-app"><img alt="" src="${app.logo}"><span></span></div>` : ""}
-        <h3></h3>
-        <p></p>
-        ${app ? `<div class="upd-foot"><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6" /></svg></span></div>
-                 <a class="upd-link" href="#/${app.id}" aria-label="${app.name} detayları"></a>` : ""}
-        <span class="br" aria-hidden="true"></span>`;
+        <div class="upd-top">
+          ${app ? `<span class="upd-logo"><img alt="${app.name}" src="${app.logo}"></span>` : "<span></span>"}
+          <time class="upd-date" datetime="${u.date}"></time>
+        </div>
+        ${u.title ? "<h3></h3>" : ""}
+        <p class="upd-text"></p>`;
       card.querySelector(".upd-date").textContent = fmtDate(u.date);
-      card.querySelector(".upd-tag").textContent = u.tag || "Haber";
-      if (app) card.querySelector(".upd-app span").textContent = app.name;
-      card.querySelector("h3").textContent = u.title;
-      card.querySelector("p").textContent = u.text;
-      if (app) {
+      if (u.title) card.querySelector("h3").textContent = Dil.pick(u.title);
+      card.querySelector(".upd-text").textContent = Dil.pick(u.text);
+      if (href) {
         card.addEventListener("pointerenter", () => Sfx.hover(panOf(card.getBoundingClientRect().left + card.offsetWidth / 2)));
-        card.querySelector(".upd-link").addEventListener("click", () => Sfx.drop());
+        card.addEventListener("click", () => Sfx.drop());
       }
       grid.appendChild(card);
     });
-  })();
+  }
 
   // sayfa her açıldığında paneller sırayla yükselir; başlık ilk seferde yazılır
   let updIO = null, titleTyped = false;
@@ -648,7 +638,7 @@
       }
       // detaydan geri dönüş, gelinen sayfaya olsun (yörünge ya da güncellemeler)
       if (!inDetail) {
-        const back = document.querySelector(".back");
+        const back = detailView.querySelector(".detail-wrap > .back");
         back.href = inUpdates ? "#/guncellemeler" : "#/";
         $("backText").textContent = inUpdates ? "Güncellemelere dön" : "Yörüngeye dön";
       }

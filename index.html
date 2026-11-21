@@ -105,14 +105,14 @@
 
     <!-- ================= SON GÜNCELLEMELER (aşağı kaydırınca alttan gelir) ================= -->
     <section class="view view-updates" id="updatesView" aria-hidden="true">
+      <!-- sol üstte geri düğmesi (diğer sayfalardaki gibi) -->
+      <a class="back upd-back" href="#/" data-bracket>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H6M11 6l-6 6 6 6" /></svg>
+        <span data-t="back">Geri</span>
+      </a>
       <div class="upd-scroll" id="updScroll">
         <section class="updates" id="updates" aria-labelledby="updTitle">
-          <a class="upd-back" href="#/">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V6M6 11l6-6 6 6" /></svg>
-            <span data-t="orbit">Yörüngeye dön</span>
-          </a>
           <header class="upd-head">
-            <span class="label upd-kicker" data-t="kicker">Ekosistemde neler oluyor</span>
             <h2 id="updTitle" data-t="updTitle">Son Güncellemeler</h2>
           </header>
           <div class="upd-grid" id="updGrid"></div>
