@@ -3,8 +3,8 @@
    Ana sitenin karanlık temasının sade, statik hâli.
    Sayfaları araclar/sayfalari-uret.js üretir.
    ========================================================== */
-@font-face { font-family: "Diapason"; src: url("../fonts/Diapason-Regular.woff2") format("woff2"); font-weight: 100 500; font-display: swap; }
-@font-face { font-family: "Diapason"; src: url("../fonts/Diapason-Bold.woff2") format("woff2"); font-weight: 600 900; font-display: swap; }
+@font-face { font-family: "Montserrat"; src: url("../fonts/Montserrat.woff2") format("woff2"); font-weight: 100 900; font-display: swap; }
+@font-face { font-family: "Montserrat"; src: url("../fonts/Montserrat-Italic.woff2") format("woff2"); font-weight: 100 900; font-style: italic; font-display: swap; }
 :root {
   --c: #48FCFC; --bg: #0a0b0d; --text: #ededee; --muted: rgba(237, 237, 238, .68); --soft: rgba(237, 237, 238, .45);
   --card: rgba(22, 23, 27, .9); --chip: rgba(255, 255, 255, .07); --chip-2: rgba(255, 255, 255, .13);
@@ -13,7 +13,7 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { background: var(--bg); }
 body {
-  min-height: 100vh; color: var(--text); font: 17px/1.6 "Diapason", "Noto Serif", "Times New Roman", serif;
+  min-height: 100vh; color: var(--text); font: 16px/1.65 "Montserrat", "Noto Sans", "Segoe UI", Arial, sans-serif;
   background: url("../assets/sis.png") 0 0 / 1000px 1000px, var(--bg);
   background-blend-mode: soft-light;
   -webkit-font-smoothing: antialiased;

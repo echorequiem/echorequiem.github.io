@@ -106,16 +106,14 @@
   --ray: rgba(255,255,255,.3);
 }
 
-/* Diapason: Echo Masterworks'ün yazı tipi (klasik serif, yerel dosya, internet gerekmez)
-   Lisans: fonts/LISANS-OFL.txt */
-@font-face { font-family: "Diapason"; src: url("../fonts/Diapason-Regular.woff2") format("woff2"); font-weight: 100 500; font-style: normal; font-display: swap; }
-@font-face { font-family: "Diapason"; src: url("../fonts/Diapason-Bold.woff2") format("woff2"); font-weight: 600 900; font-style: normal; font-display: swap; }
-@font-face { font-family: "Diapason"; src: url("../fonts/Diapason-Italic.woff2") format("woff2"); font-weight: 100 500; font-style: italic; font-display: swap; }
-@font-face { font-family: "Diapason"; src: url("../fonts/Diapason-BoldItalic.woff2") format("woff2"); font-weight: 600 900; font-style: italic; font-display: swap; }
+/* Montserrat: Echo Masterworks'ün yazı tipi (yerel dosya, internet gerekmez).
+   Tek dosyada 100–900 arası her kalınlık. Lisans: fonts/LISANS-OFL.txt */
+@font-face { font-family: "Montserrat"; src: url("../fonts/Montserrat.woff2") format("woff2"); font-weight: 100 900; font-style: normal; font-display: swap; }
+@font-face { font-family: "Montserrat"; src: url("../fonts/Montserrat-Italic.woff2") format("woff2"); font-weight: 100 900; font-style: italic; font-display: swap; }
 
 :root {
   --node: 80px;
-  --sans: "Diapason", "Noto Serif", "Times New Roman", Times, serif;
+  --sans: "Montserrat", "Noto Sans", "Segoe UI", Arial, sans-serif;
   --ease: cubic-bezier(.16, 1, .3, 1);
   --slide: 1.1s;
 }
@@ -1382,4 +1380,14 @@ body.show-detail .view-detail.rich .ap-tile { animation: msgIn .8s var(--ease) b
   .upd-head { margin: 0 0 22px; }
   .upd-grid { grid-template-columns: 1fr; gap: 14px; }
   .upd-card, .upd-card:nth-child(even) { width: auto; margin: 0; min-height: 0; padding: 18px; }
+}
+
+/* Montserrat serif yazı tipinden geniş: telefonda üst bar sığsın */
+@media (max-width: 860px) {
+  .topbar { padding: 9px 8px 9px 14px; }
+  .brand { font-size: 12px; letter-spacing: 0; }
+  .topbar nav { gap: 6px; font-size: 11.5px; }
+}
+@media (max-width: 360px) {
+  .topbar nav a[href="#/guncellemeler"] { display: none; }   /* çok dar ekranda: güncellemelere aşağı kaydırarak gidilir */
 }

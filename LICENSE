@@ -21,8 +21,8 @@ ENGLISH
    with credit to "Echo Requiem".
 
 3. Third-party components
-   - The Diapason typeface (fonts/) is based on Tinos and is licensed under the
-     SIL Open Font License 1.1 — see fonts/LISANS-OFL.txt.
+   - The Montserrat typeface (fonts/) by the Montserrat Project Authors is licensed
+     under the SIL Open Font License 1.1 — see fonts/LISANS-OFL.txt.
    - Eqo Partitura is a separate project with its own MIT licence:
      https://github.com/echorequiem/eqo-partitura
 
@@ -47,7 +47,7 @@ TÜRKÇE
    indirilebilir ve paylaşılabilir.
 
 3. Üçüncü taraf bileşenler
-   - Diapason yazı tipi (fonts/) Tinos tabanlıdır ve SIL Open Font License 1.1
-     ile lisanslıdır — bkz. fonts/LISANS-OFL.txt.
+   - Montserrat yazı tipi (fonts/) Montserrat Project Authors'a aittir ve SIL Open
+     Font License 1.1 ile lisanslıdır — bkz. fonts/LISANS-OFL.txt.
    - Eqo Partitura kendi MIT lisansına sahip ayrı bir projedir:
      https://github.com/echorequiem/eqo-partitura
