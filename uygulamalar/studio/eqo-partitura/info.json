@@ -33,23 +33,23 @@
   "durum": "Yayında",
   "surum": "1.0.0",
   "tarih": "2026-11-20",
-  "platformlar": ["Windows 10 / 11", "x64 (64-bit)"],
+  "platformlar": ["Windows 10 / 11", "Linux", "x64 (64-bit)"],
   "gereksinimler": {
-    "tr": "Windows 10 veya 11, 64-bit (x64) · 4 GB RAM (4K için 8 GB önerilir) · ~120 MB disk alanı + videolar için yer · Kurulum gerekmez, tek dosya. Windows ARM'da emülasyonla çalışır.",
-    "en": "Windows 10 or 11, 64-bit (x64) · 4 GB RAM (8 GB recommended for 4K) · ~120 MB disk space + room for your videos · No installation, a single file. Runs on Windows on ARM through emulation.",
-    "de": "Windows 10 oder 11, 64-Bit (x64) · 4 GB RAM (8 GB für 4K empfohlen) · ca. 120 MB Speicher + Platz für Videos · Keine Installation, eine einzige Datei. Läuft auf Windows on ARM per Emulation.",
-    "fr": "Windows 10 ou 11, 64 bits (x64) · 4 Go de RAM (8 Go conseillés pour la 4K) · ~120 Mo d'espace disque + place pour les vidéos · Sans installation, un seul fichier. Fonctionne sur Windows ARM par émulation.",
-    "es": "Windows 10 u 11, 64 bits (x64) · 4 GB de RAM (8 GB recomendados para 4K) · ~120 MB de disco + espacio para los vídeos · Sin instalación, un solo archivo. Funciona en Windows ARM mediante emulación.",
-    "it": "Windows 10 o 11, 64 bit (x64) · 4 GB di RAM (8 GB consigliati per il 4K) · ~120 MB di spazio su disco + spazio per i video · Nessuna installazione, un solo file. Funziona su Windows ARM tramite emulazione.",
-    "pt": "Windows 10 ou 11, 64 bits (x64) · 4 GB de RAM (8 GB recomendados para 4K) · ~120 MB de disco + espaço para os vídeos · Sem instalação, um único arquivo. Funciona no Windows ARM por emulação.",
-    "pl": "Windows 10 lub 11, 64-bit (x64) · 4 GB RAM (8 GB zalecane dla 4K) · ok. 120 MB miejsca + miejsce na filmy · Bez instalacji, jeden plik. Działa na Windows ARM przez emulację.",
-    "ru": "Windows 10 или 11, 64-бит (x64) · 4 ГБ ОЗУ (для 4K рекомендуется 8 ГБ) · ~120 МБ на диске + место для видео · Без установки, один файл. Работает на Windows ARM через эмуляцию.",
-    "ja": "Windows 10 / 11、64 ビット（x64）· RAM 4 GB（4K には 8 GB 推奨）· 約 120 MB の空き容量 + 動画の保存領域 · インストール不要の単一ファイル。Windows on ARM ではエミュレーションで動作します。",
-    "zh": "Windows 10 或 11，64 位（x64）· 4 GB 内存（4K 建议 8 GB）· 约 120 MB 磁盘空间 + 视频存储空间 · 无需安装，单个文件。可通过仿真在 ARM 版 Windows 上运行。",
-    "ko": "Windows 10 또는 11, 64비트(x64) · RAM 4 GB(4K는 8 GB 권장) · 약 120 MB 디스크 공간 + 영상 저장 공간 · 설치 불필요, 단일 파일. Windows on ARM에서는 에뮬레이션으로 실행됩니다."
+    "tr": "Windows 10 veya 11, 64-bit (x64) ya da güncel bir Linux dağıtımı (x86_64, AppImage) · 4 GB RAM (4K için 8 GB önerilir) · ~130 MB disk alanı + videolar için yer · Kurulum gerekmez, tek dosya. Windows ARM'da emülasyonla çalışır. Linux'ta dosyaya önce çalıştırma izni verin (chmod +x).",
+    "en": "Windows 10 or 11, 64-bit (x64), or a current Linux distribution (x86_64, AppImage) · 4 GB RAM (8 GB recommended for 4K) · ~130 MB disk space + room for your videos · No installation, a single file. Runs on Windows on ARM through emulation. On Linux, make the file executable first (chmod +x).",
+    "de": "Windows 10 oder 11, 64-Bit (x64), oder eine aktuelle Linux-Distribution (x86_64, AppImage) · 4 GB RAM (8 GB für 4K empfohlen) · ca. 130 MB Speicher + Platz für Videos · Keine Installation, eine einzige Datei. Läuft auf Windows on ARM per Emulation. Unter Linux die Datei zuerst ausführbar machen (chmod +x).",
+    "fr": "Windows 10 ou 11, 64 bits (x64), ou une distribution Linux récente (x86_64, AppImage) · 4 Go de RAM (8 Go conseillés pour la 4K) · ~130 Mo d'espace disque + place pour les vidéos · Sans installation, un seul fichier. Fonctionne sur Windows ARM par émulation. Sous Linux, rendez d'abord le fichier exécutable (chmod +x).",
+    "es": "Windows 10 u 11, 64 bits (x64), o una distribución Linux actual (x86_64, AppImage) · 4 GB de RAM (8 GB recomendados para 4K) · ~130 MB de disco + espacio para los vídeos · Sin instalación, un solo archivo. Funciona en Windows ARM mediante emulación. En Linux, primero haz el archivo ejecutable (chmod +x).",
+    "it": "Windows 10 o 11, 64 bit (x64), oppure una distribuzione Linux recente (x86_64, AppImage) · 4 GB di RAM (8 GB consigliati per il 4K) · ~130 MB di spazio su disco + spazio per i video · Nessuna installazione, un solo file. Funziona su Windows ARM tramite emulazione. Su Linux, rendi prima eseguibile il file (chmod +x).",
+    "pt": "Windows 10 ou 11, 64 bits (x64), ou uma distribuição Linux atual (x86_64, AppImage) · 4 GB de RAM (8 GB recomendados para 4K) · ~130 MB de disco + espaço para os vídeos · Sem instalação, um único arquivo. Funciona no Windows ARM por emulação. No Linux, torne o arquivo executável primeiro (chmod +x).",
+    "pl": "Windows 10 lub 11, 64-bit (x64), albo aktualna dystrybucja Linuksa (x86_64, AppImage) · 4 GB RAM (8 GB zalecane dla 4K) · ok. 130 MB miejsca + miejsce na filmy · Bez instalacji, jeden plik. Działa na Windows ARM przez emulację. W Linuksie najpierw nadaj plikowi prawo wykonywania (chmod +x).",
+    "ru": "Windows 10 или 11, 64-бит (x64), или современный дистрибутив Linux (x86_64, AppImage) · 4 ГБ ОЗУ (для 4K рекомендуется 8 ГБ) · ~130 МБ на диске + место для видео · Без установки, один файл. Работает на Windows ARM через эмуляцию. В Linux сначала сделайте файл исполняемым (chmod +x).",
+    "ja": "Windows 10 / 11、64 ビット（x64）、または最新の Linux ディストリビューション（x86_64、AppImage）· RAM 4 GB（4K には 8 GB 推奨）· 約 130 MB の空き容量 + 動画の保存領域 · インストール不要の単一ファイル。Windows on ARM ではエミュレーションで動作します。Linux ではまずファイルに実行権限を付けてください（chmod +x）。",
+    "zh": "Windows 10 或 11，64 位（x64），或较新的 Linux 发行版（x86_64，AppImage）· 4 GB 内存（4K 建议 8 GB）· 约 130 MB 磁盘空间 + 视频存储空间 · 无需安装，单个文件。可通过仿真在 ARM 版 Windows 上运行。在 Linux 上请先为文件添加执行权限（chmod +x）。",
+    "ko": "Windows 10 또는 11, 64비트(x64), 또는 최신 Linux 배포판(x86_64, AppImage) · RAM 4 GB(4K는 8 GB 권장) · 약 130 MB 디스크 공간 + 영상 저장 공간 · 설치 불필요, 단일 파일. Windows on ARM에서는 에뮬레이션으로 실행됩니다. Linux에서는 먼저 파일에 실행 권한을 주세요(chmod +x)."
   },
   "lisans": "MIT",
-  "kaynak": "https://github.com/echorequiem/partitura",
+  "kaynak": "https://github.com/echorequiem/eqo-partitura",
   "ozellikler": [
     {
       "tr": "MusicXML (.musicxml, .xml, .mxl) dosyalarını açar; tempo ve tempo değişimlerini dosyadan okur",
@@ -139,8 +139,13 @@
   "indirmeler": [
     {
       "ad": "Windows 10 / 11 · x64",
-      "baglanti": "https://github.com/echorequiem/partitura/releases/latest/download/Partitura.exe",
-      "boyut": 123278317
+      "baglanti": "https://github.com/echorequiem/eqo-partitura/releases/latest/download/Eqo-Partitura.exe",
+      "boyut": 123538180
+    },
+    {
+      "ad": "Linux · x86_64 · AppImage",
+      "baglanti": "https://github.com/echorequiem/eqo-partitura/releases/latest/download/Eqo-Partitura-x86_64.AppImage",
+      "boyut": 131077522
     }
   ],
   "surumNotlari": [
