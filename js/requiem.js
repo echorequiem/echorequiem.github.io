@@ -9,12 +9,14 @@
    ========================================================== */
 (() => {
   const WORKS = window.WORKS || [];
+  const ARTISTS = window.SANATCILAR || [];
+  const artistOf = (w) => ARTISTS.find((a) => a.id === (w && w.sanatci)) || { ad: "Echo Requiem" };
   const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   const store = { get(k) { try { return localStorage.getItem(k); } catch { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch {} } };
   const mb = (n) => (n ? (n >= 1048576 ? `${(n / 1048576).toFixed(n >= 10485760 ? 0 : 1)} MB` : `${Math.max(1, Math.round(n / 1024))} KB`) : "");
   const time = (s) => (!isFinite(s) || s < 0 ? "0:00" : `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, "0")}`);
   const ext = (u) => (String(u).split("?")[0].match(/\.(\w+)$/) || [, ""])[1];
-  const fileName = (w, kind) => `Echo Requiem - ${w.baslik}${w.opus ? `, ${w.opus}` : ""}.${ext(w.dosya[kind]) || kind}`;
+  const fileName = (w, kind) => `${artistOf(w).ad} - ${w.baslik}${w.opus ? `, ${w.opus}` : ""}.${ext(w.dosya[kind]) || kind}`;
   const dur = (s) => String(s || "").replace(/^0(\d)/, "$1");
 
   /* ---------------- Diller (seçim ve menü: js/dil.js) ---------------- */
@@ -173,7 +175,7 @@
     audio.src = stream(w);
     q(".pl-cover").src = w.dosya.kapak || "assets/brand/echo-requiem.svg";
     q(".pl-title").textContent = w.baslik;
-    q(".pl-opus").textContent = [w.opus, "Echo Requiem"].filter(Boolean).join(" · ");
+    q(".pl-opus").textContent = [w.opus, artistOf(w).ad].filter(Boolean).join(" · ");
     range.value = 0; paint(range);
     q(".pl-t0").textContent = "0:00";
     q(".pl-t1").textContent = w.sure ? dur(w.sure) : "0:00";
@@ -181,7 +183,7 @@
     bar.classList.add("on");
     if ("mediaSession" in navigator) {
       navigator.mediaSession.metadata = new MediaMetadata({
-        title: w.baslik, artist: "Echo Requiem", album: w.opus || "Echo Requiem",
+        title: w.baslik, artist: artistOf(w).ad, album: w.opus || artistOf(w).ad,
         artwork: w.dosya.kapak ? [{ src: new URL(w.dosya.kapak, location.href).href, sizes: "800x800", type: "image/jpeg" }] : [],
       });
     }
@@ -322,7 +324,9 @@
   Dil.on(() => {
     playerLabels();
     // dil menüsü Studio sayfasında da var: yalnızca bu sayfa açıksa yeniden çiz
-    if (pageRoot && pageRoot.dataset.page === "Requiem") render(pageRoot, true);
+    if (!pageRoot || pageRoot.dataset.page !== "Requiem") return;
+    render(pageRoot, family, true);
+    if (openArtist) fillPage(true);
   });
   const onMyPage = () => document.body.classList.contains("show-detail") && pageRoot && pageRoot.dataset.page === "Requiem";
 
@@ -342,9 +346,19 @@
   }, true);
 
   /* ---------------- Sayfa ---------------- */
-  let query = "", pageRoot = null;
+  let query = "", pageRoot = null, family = null, page = null, openArtist = "";
   const openIds = new Set();   // dil değişince açık ayrıntılar kapanmasın
+  const key = (w) => `${w.sanatci}/${w.id}`;
+  const pl = (n, one, many) => (n === 1 ? one : many);
+  const worksLabel = (n) => Dil.tx({
+    tr: `${n} eser`, en: `${n} ${pl(n, "work", "works")}`, de: `${n} ${pl(n, "Werk", "Werke")}`,
+    fr: `${n} ${pl(n, "œuvre", "œuvres")}`, es: `${n} ${pl(n, "obra", "obras")}`, it: `${n} ${pl(n, "opera", "opere")}`,
+    pt: `${n} ${pl(n, "obra", "obras")}`, pl: `Utwory: ${n}`, ru: `Произведений: ${n}`,
+    ja: `${n} 作品`, zh: `${n} 部作品`, ko: `작품 ${n}개`,
+  });
+  // yalnızca açık sanatçının eserleri (+ arama)
   const works = () => WORKS.map((w, i) => ({ w, i })).filter(({ w }) => {
+    if (w.sanatci !== openArtist) return false;
     if (!query) return true;
     const hay = `${w.baslik} ${w.opus} ${w.calgi} ${w.ton} ${w.tur} ${w.yil} ${tv(w.calgi)} ${tv(w.ton)} ${tv(w.tur)}`.toLocaleLowerCase();
     return hay.includes(query);
@@ -400,7 +414,7 @@
   function row({ w, i }, n) {
     const L = t(), f = w.dosya;
     const best = ["flac", "wav", "mp3"].find((k) => f[k]);
-    const open = openIds.has(w.id);
+    const open = openIds.has(key(w));
     return `
       <article class="rq-work${open ? " open" : ""}" data-id="${esc(w.id)}" data-i="${i}" data-name="${esc(w.baslik)}" style="--d:${(0.07 * n).toFixed(2)}s">
         <div class="rq-row">
@@ -427,47 +441,122 @@
     sync();
   }
 
-  function render(root, again) {
+  /* ---------------- Sanatçı panelleri (kare) ---------------- */
+  // Echo Studio'daki uygulama rafıyla aynı düzen: sanatçıya tıklayınca müzikleri sağdan gelir.
+  // Adres: #/requiem/<sanatçı>   Veri: eserler/<sanatçı>/sanatci.json
+  const isPhoto = (src) => /\.(jpe?g|webp)$/i.test(String(src || ""));
+  const avatar = (a) => (a.resim ? `<img src="${esc(a.resim)}" alt="" loading="lazy" draggable="false">` : `<b>${esc(a.ad.slice(0, 1))}</b>`);
+  function tiles() {
+    if (!ARTISTS.length) return `<p class="ap-empty">${esc(t().none)}</p>`;
+    return ARTISTS.map((a, n) => `
+      <a class="ap-tile" href="#/${esc(family.id)}/${esc(a.id)}" style="--d:${(0.06 * n).toFixed(2)}s" aria-label="${esc(a.ad)}">
+        <span class="ap-badge live">${esc(worksLabel(a.eserSayisi))}</span>
+        <span class="ap-icon${isPhoto(a.resim) ? " photo" : ""}">${avatar(a)}</span>
+        <span class="ap-name">${esc(a.ad)}</span>
+        ${a.rol ? `<span class="ap-sub">${esc(Dil.pick(a.rol))}</span>` : ""}
+      </a>`).join("");
+  }
+
+  function render(root, app, again) {
     pageRoot = root;
-    if (!again) openIds.clear();   // sayfaya her girişte ayrıntılar kapalı başlar
+    if (app) family = app;
     root.dataset.page = "Requiem";
     const view = root.closest(".view-detail");
-    if (view) Dil.mount(view);   // sağ üstte dil menüsü, solda dilin "Geri"si
+    if (view) { Dil.mount(view); mountPage(view); }
     root.setAttribute("lang", lang());
-    const prev = root.querySelector(".rq-search input");
-    root.innerHTML = `
-      <section class="rq${again ? " settled" : ""}" aria-label="Echo Requiem">
-        <label class="rq-search">${ICON.search}<input type="search" placeholder="${esc(t().search)}" aria-label="${esc(t().search)}" spellcheck="false" autocomplete="off"></label>
+    root.innerHTML = `<section class="ap" aria-label="${esc(family ? family.name : "Echo Requiem")}"><div class="ap-grid">${tiles()}</div></section>`;
+  }
+
+  /* ---------------- Müzik ekranı (sağdan gelir) ---------------- */
+  function mountPage(view) {
+    if (page) return;
+    page = document.createElement("section");
+    page.className = "ap-page rq-page";
+    page.setAttribute("aria-hidden", "true");
+    page.innerHTML = `
+      <a class="back ap-back" data-bracket><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H6M11 6l-6 6 6 6" /></svg><span class="ap-back-tx"></span><span class="br" aria-hidden="true"></span></a>
+      <div class="ap-scroll"><div class="ap-inner"></div></div>`;
+    view.appendChild(page);
+    page.addEventListener("click", onClick);
+  }
+
+  function fillPage(again) {
+    const a = ARTISTS.find((x) => x.id === openArtist);
+    if (!a || !page) return;
+    const L = t(), B = a.baglantilar || {};
+    const plats = PLATFORMS.filter(([k]) => B[k]).map(([k, n]) =>
+      `<a class="rq-chip" href="${esc(B[k])}" target="_blank" rel="noopener">${PLATFORM_ICON[k]}<span>${n}</span></a>`).join("");
+    page.querySelector(".ap-back-tx").textContent = family ? family.name : "Echo Requiem";
+    page.querySelector(".ap-back").href = `#/${family ? family.id : "requiem"}`;
+    page.setAttribute("lang", lang());
+    const prev = page.querySelector(".rq-search input");
+    const about = Dil.pick(a.aciklama);
+    page.querySelector(".ap-inner").innerHTML = `
+      <header class="ap-head">
+        <span class="ap-icon big${isPhoto(a.resim) ? " photo" : ""}">${avatar(a)}</span>
+        <div class="ap-head-tx">
+          <h1>${esc(a.ad)}</h1>
+          ${a.rol ? `<p class="ap-kisa">${esc(Dil.pick(a.rol))}</p>` : ""}
+          <div class="ap-meta"><span class="ap-badge live">${esc(worksLabel(a.eserSayisi))}</span></div>
+          ${plats ? `<div class="rq-chips rq-artist-links">${plats}</div>` : ""}
+        </div>
+      </header>
+      ${about ? `<p class="ap-desc rq-artist-desc">${esc(about)}</p>` : ""}
+      <section class="rq${again ? " settled" : ""}" aria-label="${esc(a.ad)}">
+        <label class="rq-search">${ICON.search}<input type="search" placeholder="${esc(L.search)}" aria-label="${esc(L.search)}" spellcheck="false" autocomplete="off"></label>
         <div class="rq-list"></div>
       </section>`;
-    const search = root.querySelector(".rq-search input");
-    if (again && prev) search.value = prev.value; else query = "";
-    renderList(root, again);
-    search.addEventListener("input", () => { query = search.value.trim().toLocaleLowerCase(); renderList(root, true); });
-
-    if (root.dataset.bound) return;   // sayfa her açılışta yeniden çizilir; tıklama dinleyicisi bir kez
-    root.dataset.bound = "1";
-    root.addEventListener("click", (e) => {
-      const card = e.target.closest(".rq-work");
-      const w = card && WORKS[+card.dataset.i];
-      if (e.target.closest(".js-play") && card) { toggle(+card.dataset.i); return; }
-      if (e.target.closest(".js-score") && w) { openScore(w); return; }
-      if (e.target.closest(".js-more") && card) { setOpen(card, !card.classList.contains("open")); return; }
-      const yt = e.target.closest(".rq-yt");
-      if (yt) {
-        audio.pause();   // video başlarken müzik dursun
-        const fr = document.createElement("iframe");
-        fr.className = "rq-yt-frame";
-        fr.dataset.v = yt.dataset.v;
-        fr.dataset.name = card ? card.dataset.name : "";
-        fr.src = `https://www.youtube-nocookie.com/embed/${encodeURIComponent(yt.dataset.v)}?autoplay=1&rel=0`;
-        fr.title = yt.getAttribute("aria-label");
-        fr.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen";
-        fr.allowFullscreen = true;
-        yt.replaceWith(fr);
-      }
-    });
+    const search = page.querySelector(".rq-search input");
+    if (again && prev) search.value = prev.value;
+    renderList(page, again);
+    search.addEventListener("input", () => { query = search.value.trim().toLocaleLowerCase(); renderList(page, true); });
+    if (!again) page.querySelector(".ap-scroll").scrollTop = 0;
   }
+
+  // main.js her adres değişiminde çağırır: sub = sanatçı kimliği ya da ""
+  function route(sub) {
+    if (!page) return;
+    const a = sub && ARTISTS.find((x) => x.id === sub);
+    if (!a) return close();
+    if (openArtist !== a.id) { openIds.clear(); query = ""; }
+    openArtist = a.id;
+    fillPage(false);
+    page.classList.add("open");
+    page.setAttribute("aria-hidden", "false");
+    const fam = family ? family.name : "Echo Requiem";
+    document.title = `${a.ad} · ${a.ad === fam ? "Echo Masterworks" : fam}`;
+  }
+  function close(instant) {
+    if (!page) return;
+    stopVideos(page);
+    if (instant) { page.classList.add("instant"); requestAnimationFrame(() => page.classList.remove("instant")); }
+    page.classList.remove("open");
+    page.setAttribute("aria-hidden", "true");
+    if (family && openArtist) document.title = `${family.name} · Echo Masterworks`;
+    openArtist = "";
+  }
+
+  function onClick(e) {
+    const card = e.target.closest(".rq-work");
+    const w = card && WORKS[+card.dataset.i];
+    if (e.target.closest(".js-play") && card) { toggle(+card.dataset.i); return; }
+    if (e.target.closest(".js-score") && w) { openScore(w); return; }
+    if (e.target.closest(".js-more") && card) { setOpen(card, !card.classList.contains("open")); return; }
+    const yt = e.target.closest(".rq-yt");
+    if (yt) {
+      audio.pause();   // video başlarken müzik dursun
+      const fr = document.createElement("iframe");
+      fr.className = "rq-yt-frame";
+      fr.dataset.v = yt.dataset.v;
+      fr.dataset.name = card ? card.dataset.name : "";
+      fr.src = `https://www.youtube-nocookie.com/embed/${encodeURIComponent(yt.dataset.v)}?autoplay=1&rel=0`;
+      fr.title = yt.getAttribute("aria-label");
+      fr.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen";
+      fr.allowFullscreen = true;
+      yt.replaceWith(fr);
+    }
+  }
+
   function setOpen(card, open) {
     // ayrıntılar ilk açılışta kurulur: kapalı satırlar sayfayı kalabalıklaştırmasın
     if (open && !card.querySelector(".rq-more")) {
@@ -475,7 +564,8 @@
       void card.offsetHeight;   // kapalı hâli bir kez çizilsin, açılış yumuşak kaysın
     }
     card.classList.toggle("open", open);
-    open ? openIds.add(card.dataset.id) : openIds.delete(card.dataset.id);
+    const k = `${openArtist}/${card.dataset.id}`;
+    open ? openIds.add(k) : openIds.delete(k);
     const b = card.querySelector(".rq-more-btn");
     if (b) { b.setAttribute("aria-expanded", String(open)); b.querySelector("span").textContent = open ? t().close : t().details; }
     // kapanan ayrıntılardaki video sussun
@@ -487,11 +577,12 @@
   // ana ekrandaki önizleme panelinin etiketleri
   const meta = () => {
     const has = (k) => WORKS.some((w) => w.dosya[k]);
-    const n = WORKS.length;
+    const n = WORKS.length, an = ARTISTS.length;
+    const artists = an > 1 ? Dil.tx({ tr: `${an} sanatçı`, en: `${an} artists`, de: `${an} Künstler`, fr: `${an} artistes`, es: `${an} artistas`, it: `${an} artisti`, pt: `${an} artistas`, pl: `Artyści: ${an}`, ru: `Артистов: ${an}`, ja: `${an} アーティスト`, zh: `${an} 位艺术家`, ko: `아티스트 ${an}명` }) : "";
     const works = Dil.tx({ tr: `${n} eser`, en: `${n} works`, de: `${n} Werke`, fr: `${n} œuvres`, es: `${n} obras`, it: `${n} opere`, pt: `${n} obras`, pl: `Utwory: ${n}`, ru: `Произведений: ${n}`, ja: `${n} 作品`, zh: `${n} 部作品`, ko: `작품 ${n}개` });
     const video = Dil.tx({ tr: "Video", en: "Video", de: "Video", fr: "Vidéo", es: "Vídeo", it: "Video", pt: "Vídeo", pl: "Wideo", ru: "Видео", ja: "動画", zh: "视频", ko: "영상" });
-    return [works, "FLAC · WAV · MP3",
+    return [artists, works, "FLAC · WAV · MP3",
       [has("nota") && t().score, has("midi") && "MIDI", WORKS.some((w) => (w.videolar || []).length) && video].filter(Boolean).join(" · ")].filter(Boolean);
   };
-  window.Requiem = { render, meta,stopVideos: () => stopVideos() };
+  window.Requiem = { render, route, close, meta, get sub() { return openArtist; }, stopVideos: () => stopVideos() };
 })();

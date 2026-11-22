@@ -1,0 +1,12 @@
+{
+  "ad": "Echo Requiem",
+  "sira": 1,
+  "rol": { "tr": "Besteci", "en": "Composer", "de": "Komponist", "fr": "Compositeur", "es": "Compositor", "it": "Compositore", "pt": "Compositor", "pl": "Kompozytor", "ru": "Композитор", "ja": "作曲家", "zh": "作曲家", "ko": "작곡가" },
+  "aciklama": "",
+  "baglantilar": {
+    "spotify": "https://open.spotify.com/artist/1RKHAJuPPU7GUhiq7euR1i",
+    "appleMusic": "",
+    "youtube": "",
+    "imslp": "https://imslp.org/wiki/User:Echo_Requiem"
+  }
+}

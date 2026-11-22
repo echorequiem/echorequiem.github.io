@@ -552,7 +552,7 @@
 
   function renderDetail(app, i, sub = "") {
     // başka bir ailenin açık kalmış uygulama sayfası kaymadan kapansın
-    if (window.Uygulamalar) window.Uygulamalar.close(true);
+    [window.Uygulamalar, window.Requiem].forEach((m) => m && m.close && m.close(true));
     // renk değişkeni yalnızca değişince yazılır: her yazılış tüm sayfanın stilini yeniden hesaplatır
     if (detailView.style.getPropertyValue("--c") !== app.color) detailView.style.setProperty("--c", app.color);
     detailView.classList.toggle("is-white", isWhite(app.color));
@@ -736,8 +736,8 @@
     if (!lead) return;
     // Çizgi tam ekran bir SVG: her yeniden çizim, üstündeki panelin bulanıklığını da
     // yeniden hesaplatır. Uygulama yarım pikselden az kıpırdadıysa hiç dokunma.
-    if (lastD && lastLead.ref === lead && Math.abs(n.x - lastLead.x) < 0.6 && Math.abs(n.y - lastLead.y) < 0.6 &&
-        Math.abs(cx - lastLead.cx) < 0.6 && Math.abs(cy - lastLead.cy) < 0.6) return;
+    if (lastD && lastLead.ref === lead && Math.abs(n.x - lastLead.x) < 2 && Math.abs(n.y - lastLead.y) < 2 &&
+        Math.abs(cx - lastLead.cx) < 2 && Math.abs(cy - lastLead.cy) < 2) return;
     lastLead.x = n.x; lastLead.y = n.y; lastLead.cx = cx; lastLead.cy = cy; lastLead.ref = lead;
     const ex = lead.x, ey = lead.y;
     const dx0 = ex - n.x, dy0 = ey - n.y;
@@ -860,7 +860,8 @@
     for (let i = 0; i < N; i++) {
       const n = nodes[i];
       // seçili uygulama sakinleşir: çizgi sabit durur, sürekli yeniden çizilmez
-      const calm = 1 - 0.85 * n.focus;
+      // seçili logo tamamen durur: çizgi her karede yeniden hesaplanıp çizilmesin
+      const calm = 1 - n.focus;
       const current = Math.sin(t * 0.00011 + n.ph3) * 0.07 * calm;    // akıntı
       const a = angle + (i / N) * 6.2832 + n.jitter + current;
       const breathe = 1 + 0.045 * calm * Math.sin(t * n.sp1 + n.ph1);

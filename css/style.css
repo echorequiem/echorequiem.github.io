@@ -172,8 +172,10 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   position: fixed; inset: 0; z-index: 0; pointer-events: none;
   background: radial-gradient(ellipse 75% 70% at 50% 50%, transparent 62%, var(--edge) 100%);
 }
+/* büyük renk lekesi kendi katmanında: açılıp kapanırken yeniden boyanmasın */
 .accent {
   --c: #ffffff;
+  will-change: opacity;
   position: fixed; z-index: 0; pointer-events: none;
   width: 70vmax; height: 70vmax; left: 46%; top: 50%;
   margin: -35vmax 0 0 -35vmax;
@@ -1391,3 +1393,11 @@ body.show-detail .view-detail.rich .ap-tile { animation: msgIn .8s var(--ease) b
 @media (max-width: 360px) {
   .topbar nav a[href="#/guncellemeler"] { display: none; }   /* çok dar ekranda: güncellemelere aşağı kaydırarak gidilir */
 }
+
+/* Echo Requiem: sanatçı panelleri ve müzik ekranı (Echo Studio ile aynı düzen) */
+.ap-icon.photo img { object-fit: cover; border-radius: 50%; filter: none; }
+.ap-icon.big.photo { padding: 0; overflow: hidden; border-radius: 50%; }
+.ap-icon.big.photo img { border-radius: 0; }
+.rq-artist-links { margin-top: 14px; }
+.rq-artist-desc { margin-top: 24px; max-width: 780px; color: var(--muted); }
+.rq-page .rq { margin-top: 34px; }

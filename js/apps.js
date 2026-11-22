@@ -16,7 +16,7 @@ window.APPS = [
     name: "Echo Requiem",
     code: "AİLE 01",
     color: "#48FCFC",
-    logo: "assets/brand/echo-requiem.svg",
+    logo: "assets/brand/echo-requiem.png",
     category: { tr: "Besteler", en: "Compositions", de: "Kompositionen", fr: "Compositions", es: "Composiciones", it: "Composizioni", pt: "Composições", pl: "Kompozycje", ru: "Сочинения", ja: "作品", zh: "作品", ko: "작품" },
     tagline: "Klasik müzik eserleri",
     description: {
@@ -41,7 +41,7 @@ window.APPS = [
     name: "Echo Studio",
     code: "AİLE 02",
     color: "#9A15EE",
-    logo: "assets/brand/echo-studio.svg",
+    logo: "assets/brand/echo-studio.png",
     category: { tr: "Müzik araçları", en: "Music tools", de: "Musikwerkzeuge", fr: "Outils musicaux", es: "Herramientas musicales", it: "Strumenti musicali", pt: "Ferramentas musicais", pl: "Narzędzia muzyczne", ru: "Инструменты для музыки", ja: "音楽ツール", zh: "音乐工具", ko: "음악 도구" },
     tagline: "Müzik yaratma ve görselleştirme araçları",
     description: {
@@ -65,12 +65,12 @@ window.APPS = [
 
 /* Şimdilik ana ekranda olmayan aileler. Birini geri getirmek için
    bloğu yukarıdaki listeye taşı.
-  { id: "song", name: "Echo Song", code: "AİLE 03", color: "#72FA78", logo: "assets/brand/echo-song.svg",
+  { id: "song", name: "Echo Song", code: "AİLE 03", color: "#72FA78", logo: "assets/brand/echo-song.png",
     category: "Müzik", tagline: "Müzik dinleme ve paylaşma", description: "...", soon: "...", status: "Yakında" },
-  { id: "game", name: "Echo Game", code: "AİLE 04", color: "#FD3D38", logo: "assets/brand/echo-game.svg",
+  { id: "game", name: "Echo Game", code: "AİLE 04", color: "#FD3D38", logo: "assets/brand/echo-game.png",
     category: "Oyun", tagline: "Oyunlar", description: "...", soon: "...", status: "Yakında" },
-  { id: "apps", name: "Echo Apps", code: "AİLE 05", color: "#FE9154", logo: "assets/brand/echo-apps.svg",
+  { id: "apps", name: "Echo Apps", code: "AİLE 05", color: "#FE9154", logo: "assets/brand/echo-apps.png",
     category: "Uygulamalar", tagline: "Günlük uygulamalar", description: "...", soon: "...", status: "Yakında" },
-  { id: "soft", name: "Echo Soft", code: "AİLE 06", color: "#FFFFFF", logo: "assets/brand/echo-soft.svg",
+  { id: "soft", name: "Echo Soft", code: "AİLE 06", color: "#FFFFFF", logo: "assets/brand/echo-soft.png",
     category: "İşletim sistemi", tagline: "Gentoo tabanlı işletim sistemi", description: "...", soon: "...", status: "Yakında" },
 */

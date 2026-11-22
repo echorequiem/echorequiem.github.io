@@ -105,3 +105,5 @@ audio { width: 100%; max-width: 640px; }
   .cols { grid-template-columns: 1fr; }
   .btn { flex: 1 1 100%; }
 }
+.tile img.photo { aspect-ratio: 1; object-fit: cover; border-radius: 50%; }
+.icon.round.cover { padding: 0; overflow: hidden; }

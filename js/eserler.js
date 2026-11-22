@@ -1,8 +1,39 @@
 /* Bu dosya otomatik üretilir: ESERLERI_GUNCELLE.bat (araclar/eserleri-guncelle.js).
-   Elle düzenleme; eserler/<klasör>/info.json dosyasını değiştirip yeniden çalıştır. */
+   Elle düzenleme; eserler/<sanatçı>/<eser>/info.json ya da eserler/<sanatçı>/sanatci.json dosyasını değiştirip yeniden çalıştır. */
+window.SANATCILAR = [
+  {
+    "id": "echo-requiem",
+    "ad": "Echo Requiem",
+    "sira": 1,
+    "rol": {
+      "tr": "Besteci",
+      "en": "Composer",
+      "de": "Komponist",
+      "fr": "Compositeur",
+      "es": "Compositor",
+      "it": "Compositore",
+      "pt": "Compositor",
+      "pl": "Kompozytor",
+      "ru": "Композитор",
+      "ja": "作曲家",
+      "zh": "作曲家",
+      "ko": "작곡가"
+    },
+    "aciklama": "",
+    "resim": "eserler/echo-requiem/resim.png",
+    "baglantilar": {
+      "spotify": "https://open.spotify.com/artist/1RKHAJuPPU7GUhiq7euR1i",
+      "appleMusic": "",
+      "youtube": "",
+      "imslp": "https://imslp.org/wiki/User:Echo_Requiem"
+    },
+    "eserSayisi": 3
+  }
+];
 window.WORKS = [
   {
     "id": "op1-slave",
+    "sanatci": "echo-requiem",
     "baslik": "SLAVE",
     "opus": "Op. 1",
     "yil": 2026,
@@ -13,12 +44,12 @@ window.WORKS = [
     "lisans": "CC BY-NC-ND 4.0",
     "aciklama": "",
     "dosya": {
-      "mp3": "eserler/op1-slave/ses.mp3",
-      "flac": "eserler/op1-slave/ses.flac",
-      "wav": "eserler/op1-slave/ses.wav",
-      "nota": "eserler/op1-slave/nota.pdf",
-      "midi": "eserler/op1-slave/midi.mid",
-      "kapak": "eserler/op1-slave/kapak.jpg"
+      "mp3": "eserler/echo-requiem/op1-slave/ses.mp3",
+      "flac": "eserler/echo-requiem/op1-slave/ses.flac",
+      "wav": "eserler/echo-requiem/op1-slave/ses.wav",
+      "nota": "eserler/echo-requiem/op1-slave/nota.pdf",
+      "midi": "eserler/echo-requiem/op1-slave/midi.mid",
+      "kapak": "eserler/echo-requiem/op1-slave/kapak.jpg"
     },
     "boyut": {
       "mp3": 4846546,
@@ -39,6 +70,7 @@ window.WORKS = [
   },
   {
     "id": "op2-waltz-of-broken-clocks",
+    "sanatci": "echo-requiem",
     "baslik": "Waltz of Broken Clocks",
     "opus": "Op. 2",
     "yil": 2026,
@@ -49,11 +81,11 @@ window.WORKS = [
     "lisans": "CC BY-NC-ND 4.0",
     "aciklama": "",
     "dosya": {
-      "mp3": "eserler/op2-waltz-of-broken-clocks/ses.mp3",
-      "flac": "eserler/op2-waltz-of-broken-clocks/ses.flac",
-      "wav": "eserler/op2-waltz-of-broken-clocks/ses.wav",
-      "midi": "eserler/op2-waltz-of-broken-clocks/midi.mid",
-      "kapak": "eserler/op2-waltz-of-broken-clocks/kapak.jpg"
+      "mp3": "eserler/echo-requiem/op2-waltz-of-broken-clocks/ses.mp3",
+      "flac": "eserler/echo-requiem/op2-waltz-of-broken-clocks/ses.flac",
+      "wav": "eserler/echo-requiem/op2-waltz-of-broken-clocks/ses.wav",
+      "midi": "eserler/echo-requiem/op2-waltz-of-broken-clocks/midi.mid",
+      "kapak": "eserler/echo-requiem/op2-waltz-of-broken-clocks/kapak.jpg"
     },
     "boyut": {
       "mp3": 20003048,
@@ -73,6 +105,7 @@ window.WORKS = [
   },
   {
     "id": "op3-out-of-time",
+    "sanatci": "echo-requiem",
     "baslik": "Out of Time",
     "opus": "Op. 3",
     "yil": 2026,
@@ -83,10 +116,10 @@ window.WORKS = [
     "lisans": "CC BY-NC-ND 4.0",
     "aciklama": "",
     "dosya": {
-      "wav": "eserler/op3-out-of-time/ses.wav",
-      "nota": "eserler/op3-out-of-time/nota.pdf",
-      "midi": "eserler/op3-out-of-time/midi.mid",
-      "kapak": "eserler/op3-out-of-time/kapak.jpg"
+      "wav": "eserler/echo-requiem/op3-out-of-time/ses.wav",
+      "nota": "eserler/echo-requiem/op3-out-of-time/nota.pdf",
+      "midi": "eserler/echo-requiem/op3-out-of-time/midi.mid",
+      "kapak": "eserler/echo-requiem/op3-out-of-time/kapak.jpg"
     },
     "boyut": {
       "wav": 43894194,
@@ -104,9 +137,3 @@ window.WORKS = [
     }
   }
 ];
-window.REQUIEM_LINKS = {
-  "spotify": "https://open.spotify.com/artist/1RKHAJuPPU7GUhiq7euR1i",
-  "appleMusic": "",
-  "youtube": "",
-  "imslp": "https://imslp.org/wiki/User:Echo_Requiem"
-};
