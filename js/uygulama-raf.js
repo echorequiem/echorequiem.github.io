@@ -201,10 +201,11 @@
     lb.setAttribute("aria-hidden", "false");
     lb.querySelector(".lb-x").focus();
   }
-  function go(d) { if (shots.length > 1) { at = (at + d + shots.length) % shots.length; show(); } }
+  function go(d) { if (shots.length > 1) { at = (at + d + shots.length) % shots.length; show(); if (window.Sfx) Sfx.flip(d); } }
   function closeLb() {
     if (!lb || !lb.classList.contains("open")) return false;
     lb.classList.remove("open");
+    if (window.Sfx) Sfx.close();
     lb.setAttribute("aria-hidden", "true");
     if (lbFocus) lbFocus.focus();
     return true;

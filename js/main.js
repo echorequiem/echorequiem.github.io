@@ -426,7 +426,7 @@
       l.innerHTML = leafSvg;
       box.appendChild(l);
     });
-    // ara sıra suya düşen küçük damlalar (+ çok uzak, kısık bir ses)
+    // ara sıra suya düşen küçük damlalar (yalnızca görüntü, ses yok)
     const dripLoop = () => {
       setTimeout(dripLoop, 3200 + Math.random() * 3800);
       if (away() || document.hidden || loading) return;
@@ -434,7 +434,6 @@
       const y = innerHeight * (0.12 + Math.random() * 0.8);
       if (activeIndex >= 0 && x > innerWidth - 420) return;      // panelin arkasına düşmesin
       ripple(x, y, "drop");
-      Sfx.drip(panOf(x));
     };
     setTimeout(dripLoop, 2500);
   })();
@@ -635,7 +634,9 @@
       // aynı ailenin içinde alt sayfaya geçiş (ör. uygulama sayfası): sayfa yeniden çizilmez
       if (inDetail && detailIndex === i) {
         const p = app.page && window[app.page];
+        const was = (p && p.sub) || "";
         if (p && p.route) p.route(sub);
+        if (p && was !== ((p.sub) || "")) Sfx.slide(!p.sub);   // alt sayfa (uygulama, sanatçı) açılıp kapanırken
         return;
       }
       // detaydan geri dönüş, gelinen sayfaya olsun (yörünge ya da güncellemeler)
@@ -682,6 +683,24 @@
     }
   }
   addEventListener("hashchange", route);
+
+  // Sayfaların içindeki etkileşimlerin sesleri (tek yerden, yakalama aşamasında:
+  // olayı durduran menüler de duyulsun)
+  const panAt = (el) => { const b = el.getBoundingClientRect(); return panOf(b.left + b.width / 2); };
+  const UI_TAP = ".js-more, .js-score, .rq-lang-btn, .rq-lang-list [data-l], .rq-chip, .rq-modal .rq-btn:not([download]), .ap-shot";
+  document.addEventListener("click", (e) => {
+    const el = e.target.closest && e.target.closest("a, button");
+    if (!el) return;
+    if (el.matches(".ap-tile")) Sfx.drop(panAt(el));
+    else if (el.matches("[download], .ap-dl")) Sfx.success();
+    else if (el.matches(UI_TAP)) Sfx.tap(panAt(el));
+  }, true);
+  let hoverEl = null;
+  document.addEventListener("pointerover", (e) => {
+    const el = e.target.closest && e.target.closest(".ap-tile");
+    if (el && el !== hoverEl) Sfx.hover(panAt(el));
+    hoverEl = el;
+  });
 
   addEventListener("keydown", (e) => {
     if (inDetail) {
