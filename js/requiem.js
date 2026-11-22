@@ -80,6 +80,10 @@
     "Do diyez minör": { en: "C♯ minor", de: "cis-Moll", fr: "Do dièse mineur", es: "Do sostenido menor", it: "Do diesis minore", pt: "Dó sustenido menor", pl: "cis-moll", ru: "до-диез минор", ja: "嬰ハ短調", zh: "升C小调", ko: "올림다 단조" },
     "Dramatik": { en: "Dramatic", de: "Dramatisch", fr: "Dramatique", es: "Dramático", it: "Drammatico", pt: "Dramático", pl: "Dramatyczny", ru: "Драматическое", ja: "劇的", zh: "戏剧性", ko: "극적" },
     "Vals": { en: "Waltz", de: "Walzer", fr: "Valse", es: "Vals", it: "Valzer", pt: "Valsa", pl: "Walc", ru: "Вальс", ja: "ワルツ", zh: "圆舞曲", ko: "왈츠" },
+    "C sharp minor": { tr: "Do diyez minör", en: "C♯ minor", de: "cis-Moll", fr: "Do dièse mineur", es: "Do sostenido menor", it: "Do diesis minore", pt: "Dó sustenido menor", pl: "cis-moll", ru: "до-диез минор", ja: "嬰ハ短調", zh: "升C小调", ko: "올림다 단조" },
+    "E flat minor": { tr: "Mi bemol minör", en: "E♭ minor", de: "es-Moll", fr: "Mi bémol mineur", es: "Mi bemol menor", it: "Mi bemolle minore", pt: "Mi bemol menor", pl: "es-moll", ru: "ми-бемоль минор", ja: "変ホ短調", zh: "降E小调", ko: "내림마 단조" },
+    "Waltz": { tr: "Vals", en: "Waltz", de: "Walzer", fr: "Valse", es: "Vals", it: "Valzer", pt: "Valsa", pl: "Walc", ru: "Вальс", ja: "ワルツ", zh: "圆舞曲", ko: "왈츠" },
+    "Piano": { tr: "Piyano", en: "Piano", de: "Klavier", fr: "Piano", es: "Piano", it: "Pianoforte", pt: "Piano", pl: "Fortepian", ru: "Фортепиано", ja: "ピアノ", zh: "钢琴", ko: "피아노" },
     "Melankolik": { en: "Melancholic", de: "Melancholisch", fr: "Mélancolique", es: "Melancólico", it: "Malinconico", pt: "Melancólico", pl: "Melancholijny", ru: "Меланхоличное", ja: "メランコリック", zh: "忧郁", ko: "우울한" },
   };
   const lang = () => Dil.lang;   // seçili dil ortak menüden (js/dil.js)
@@ -350,11 +354,18 @@
   const openIds = new Set();   // dil değişince açık ayrıntılar kapanmasın
   const key = (w) => `${w.sanatci}/${w.id}`;
   const pl = (n, one, many) => (n === 1 ? one : many);
-  const worksLabel = (n) => Dil.tx({
+  const worksLabel = (n) => (!n ? Dil.status("Yakında") : Dil.tx({
     tr: `${n} eser`, en: `${n} ${pl(n, "work", "works")}`, de: `${n} ${pl(n, "Werk", "Werke")}`,
     fr: `${n} ${pl(n, "œuvre", "œuvres")}`, es: `${n} ${pl(n, "obra", "obras")}`, it: `${n} ${pl(n, "opera", "opere")}`,
     pt: `${n} ${pl(n, "obra", "obras")}`, pl: `Utwory: ${n}`, ru: `Произведений: ${n}`,
     ja: `${n} 作品`, zh: `${n} 部作品`, ko: `작품 ${n}개`,
+  }));
+  // eseri henüz eklenmemiş sanatçı
+  const soonText = () => Dil.tx({
+    tr: "Bu sanatçının eserleri yakında burada olacak.", en: "Works by this artist are coming soon.", de: "Werke dieses Künstlers folgen in Kürze.",
+    fr: "Les œuvres de cet artiste arrivent bientôt.", es: "Las obras de este artista llegarán pronto.", it: "Le opere di questo artista arriveranno presto.",
+    pt: "As obras deste artista chegam em breve.", pl: "Utwory tego artysty pojawią się wkrótce.", ru: "Произведения этого автора скоро появятся.",
+    ja: "このアーティストの作品は近日公開予定です。", zh: "该艺术家的作品即将上线。", ko: "이 아티스트의 작품이 곧 추가됩니다.",
   });
   // yalnızca açık sanatçının eserleri (+ arama)
   const works = () => WORKS.map((w, i) => ({ w, i })).filter(({ w }) => {
@@ -437,7 +448,8 @@
     const list = root.querySelector(".rq-list");
     if (again) root.querySelector(".rq").classList.add("settled");   // aramada satırlar yeniden süzülmesin
     const items = works();
-    list.innerHTML = items.length ? items.map(row).join("") : `<p class="rq-empty">${esc(t().none)}</p>`;
+    const none = !WORKS.some((w) => w.sanatci === openArtist);
+    list.innerHTML = items.length ? items.map(row).join("") : `<p class="rq-empty">${esc(none ? soonText() : t().none)}</p>`;
     sync();
   }
 
@@ -450,7 +462,7 @@
     if (!ARTISTS.length) return `<p class="ap-empty">${esc(t().none)}</p>`;
     return ARTISTS.map((a, n) => `
       <a class="ap-tile" href="#/${esc(family.id)}/${esc(a.id)}" style="--d:${(0.06 * n).toFixed(2)}s" aria-label="${esc(a.ad)}">
-        <span class="ap-badge live">${esc(worksLabel(a.eserSayisi))}</span>
+        <span class="ap-badge${a.eserSayisi ? " live" : ""}">${esc(worksLabel(a.eserSayisi))}</span>
         <span class="ap-icon${isPhoto(a.resim) ? " photo" : ""}">${avatar(a)}</span>
         <span class="ap-name">${esc(a.ad)}</span>
         ${a.rol ? `<span class="ap-sub">${esc(Dil.pick(a.rol))}</span>` : ""}
@@ -497,13 +509,13 @@
         <div class="ap-head-tx">
           <h1>${esc(a.ad)}</h1>
           ${a.rol ? `<p class="ap-kisa">${esc(Dil.pick(a.rol))}</p>` : ""}
-          <div class="ap-meta"><span class="ap-badge live">${esc(worksLabel(a.eserSayisi))}</span></div>
+          <div class="ap-meta"><span class="ap-badge${a.eserSayisi ? " live" : ""}">${esc(worksLabel(a.eserSayisi))}</span></div>
           ${plats ? `<div class="rq-chips rq-artist-links">${plats}</div>` : ""}
         </div>
       </header>
       ${about ? `<p class="ap-desc rq-artist-desc">${esc(about)}</p>` : ""}
       <section class="rq${again ? " settled" : ""}" aria-label="${esc(a.ad)}">
-        <label class="rq-search">${ICON.search}<input type="search" placeholder="${esc(L.search)}" aria-label="${esc(L.search)}" spellcheck="false" autocomplete="off"></label>
+        <label class="rq-search"${a.eserSayisi ? "" : " hidden"}>${ICON.search}<input type="search" placeholder="${esc(L.search)}" aria-label="${esc(L.search)}" spellcheck="false" autocomplete="off"></label>
         <div class="rq-list"></div>
       </section>`;
     const search = page.querySelector(".rq-search input");

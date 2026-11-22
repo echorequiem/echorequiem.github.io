@@ -28,6 +28,47 @@ window.SANATCILAR = [
       "imslp": "https://imslp.org/wiki/User:Echo_Requiem"
     },
     "eserSayisi": 3
+  },
+  {
+    "id": "bach",
+    "ad": "Johann Sebastian Bach",
+    "sira": 2,
+    "rol": {
+      "tr": "Besteci",
+      "en": "Composer",
+      "de": "Komponist",
+      "fr": "Compositeur",
+      "es": "Compositor",
+      "it": "Compositore",
+      "pt": "Compositor",
+      "pl": "Kompozytor",
+      "ru": "Композитор",
+      "ja": "作曲家",
+      "zh": "作曲家",
+      "ko": "작곡가"
+    },
+    "aciklama": {
+      "tr": "Barok dönemin Alman bestecisi ve orgcusu (1685–1750).",
+      "en": "German composer and organist of the Baroque era (1685–1750).",
+      "de": "Deutscher Komponist und Organist des Barock (1685–1750).",
+      "fr": "Compositeur et organiste allemand de l'époque baroque (1685–1750).",
+      "es": "Compositor y organista alemán del Barroco (1685–1750).",
+      "it": "Compositore e organista tedesco del periodo barocco (1685–1750).",
+      "pt": "Compositor e organista alemão do período barroco (1685–1750).",
+      "pl": "Niemiecki kompozytor i organista epoki baroku (1685–1750).",
+      "ru": "Немецкий композитор и органист эпохи барокко (1685–1750).",
+      "ja": "バロック時代のドイツの作曲家・オルガニスト（1685–1750）。",
+      "zh": "巴洛克时期的德国作曲家与管风琴家（1685–1750）。",
+      "ko": "바로크 시대의 독일 작곡가이자 오르가니스트 (1685–1750)."
+    },
+    "resim": "eserler/bach/resim.jpg",
+    "baglantilar": {
+      "spotify": "https://open.spotify.com/artist/5aIqB5nVVvmFsvSdExz408",
+      "appleMusic": "",
+      "youtube": "",
+      "imslp": "https://imslp.org/wiki/Category:Bach,_Johann_Sebastian"
+    },
+    "eserSayisi": 0
   }
 ];
 window.WORKS = [
@@ -38,8 +79,8 @@ window.WORKS = [
     "opus": "Op. 1",
     "yil": 2026,
     "calgi": "Piano",
-    "ton": "C#",
-    "tur": "Dramatik",
+    "ton": "C sharp minor",
+    "tur": "",
     "sure": "02:49",
     "lisans": "CC BY-NC-ND 4.0",
     "aciklama": "",
@@ -75,7 +116,7 @@ window.WORKS = [
     "opus": "Op. 2",
     "yil": 2026,
     "calgi": "Piano",
-    "ton": "C#",
+    "ton": "C sharp minor",
     "tur": "Waltz",
     "sure": "03:05",
     "lisans": "CC BY-NC-ND 4.0",
@@ -110,7 +151,7 @@ window.WORKS = [
     "opus": "Op. 3",
     "yil": 2026,
     "calgi": "Piano",
-    "ton": "C#",
+    "ton": "E flat minor",
     "tur": "",
     "sure": "",
     "lisans": "CC BY-NC-ND 4.0",
