@@ -40,6 +40,11 @@ window.Sfx = (() => {
     if (enabled) startAmbient();
   };
   ["pointerdown", "keydown", "touchstart"].forEach((ev) => addEventListener(ev, unlock, { passive: true }));
+  // Ses motorunu kurmak (new AudioContext) Windows'ta tarayıcıyı ~150-250 ms dondurur.
+  // İlk tıklamada kurulunca bu donma tam panel açılırken oluyordu; bu yüzden motor
+  // sayfa daha yüklenirken (sahne belirmeden önce) sessiz/askıda kurulur, ilk
+  // tıklamada yalnızca uyandırılır (resume: beklemesiz).
+  if (enabled) setTimeout(init, 0);
   document.addEventListener("visibilitychange", () => {
     if (!ctx) return;
     document.hidden ? ctx.suspend() : ctx.resume();
