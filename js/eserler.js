@@ -217,9 +217,11 @@ window.WORKS = [
       "wav": 35171382,
       "nota": 401810
     },
-    "videolar": [],
+    "videolar": [
+      "B7juPYNXj1U"
+    ],
     "baglantilar": {
-      "youtube": "",
+      "youtube": "https://youtu.be/B7juPYNXj1U",
       "spotify": "",
       "appleMusic": "",
       "imslp": "https://imslp.org/wiki/Prelude_and_Fugue_in_C_major,_BWV_846_(Bach,_Johann_Sebastian)"
