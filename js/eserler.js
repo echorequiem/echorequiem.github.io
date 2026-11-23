@@ -125,6 +125,7 @@ window.WORKS = [
       "mp3": "eserler/echo-requiem/op2-waltz-of-broken-clocks/ses.mp3",
       "flac": "eserler/echo-requiem/op2-waltz-of-broken-clocks/ses.flac",
       "wav": "eserler/echo-requiem/op2-waltz-of-broken-clocks/ses.wav",
+      "nota": "eserler/echo-requiem/op2-waltz-of-broken-clocks/nota.pdf",
       "midi": "eserler/echo-requiem/op2-waltz-of-broken-clocks/midi.mid",
       "kapak": "eserler/echo-requiem/op2-waltz-of-broken-clocks/kapak.jpg"
     },
@@ -132,6 +133,7 @@ window.WORKS = [
       "mp3": 20003048,
       "flac": 24067147,
       "wav": 80736326,
+      "nota": 292962,
       "midi": 11795
     },
     "videolar": [
