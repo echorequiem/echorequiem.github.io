@@ -17,6 +17,26 @@
   const time = (s) => (!isFinite(s) || s < 0 ? "0:00" : `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, "0")}`);
   const ext = (u) => (String(u).split("?")[0].match(/\.(\w+)$/) || [, ""])[1];
   const fileName = (w, kind) => `${artistOf(w).ad} - ${w.baslik}${w.opus ? `, ${w.opus}` : ""}.${ext(w.dosya[kind]) || kind}`;
+  // lisansın kısa açıklaması (bilinmeyen lisansta açıklama gösterilmez)
+  const licText = (lic) => {
+    const k = String(lic || "").toUpperCase();
+    if (k.includes("BY-NC-ND")) return t().lic;
+    if (k.includes("BY-SA")) return Dil.tx({
+      tr: "Adını vererek her amaçla paylaşabilir ve uyarlayabilirsin; uyarlamalar aynı lisansla paylaşılmalı.",
+      en: "You may share and adapt it for any purpose with credit; adaptations must use the same license.",
+      de: "Du darfst es mit Namensnennung für jeden Zweck teilen und bearbeiten; Bearbeitungen unter derselben Lizenz.",
+      fr: "Vous pouvez le partager et l'adapter à toute fin en citant l'auteur ; les adaptations gardent la même licence.",
+      es: "Puedes compartirlo y adaptarlo con cualquier fin dando crédito; las adaptaciones deben usar la misma licencia.",
+      it: "Puoi condividerlo e adattarlo per qualsiasi scopo citando l'autore; gli adattamenti devono usare la stessa licenza.",
+      pt: "Você pode compartilhar e adaptar para qualquer fim, com crédito; adaptações devem usar a mesma licença.",
+      pl: "Możesz udostępniać i adaptować w dowolnym celu z podaniem autora; adaptacje na tej samej licencji.",
+      ru: "Можно распространять и изменять с любой целью с указанием автора; производные — под той же лицензией.",
+      ja: "クレジット表示のうえ、目的を問わず共有・改変できます。改変物は同じライセンスで共有してください。",
+      zh: "注明作者即可出于任何目的分享和改编；改编作品须采用相同许可。",
+      ko: "출처를 밝히면 어떤 목적으로든 공유·변경할 수 있으며, 변경물은 같은 라이선스로 공유해야 합니다.",
+    });
+    return "";
+  };
   const dur = (s) => String(s || "").replace(/^0(\d)/, "$1");
 
   /* ---------------- Diller (seçim ve menü: js/dil.js) ---------------- */
@@ -84,6 +104,8 @@
     "E flat minor": { tr: "Mi bemol minör", en: "E♭ minor", de: "es-Moll", fr: "Mi bémol mineur", es: "Mi bemol menor", it: "Mi bemolle minore", pt: "Mi bemol menor", pl: "es-moll", ru: "ми-бемоль минор", ja: "変ホ短調", zh: "降E小调", ko: "내림마 단조" },
     "Waltz": { tr: "Vals", en: "Waltz", de: "Walzer", fr: "Valse", es: "Vals", it: "Valzer", pt: "Valsa", pl: "Walc", ru: "Вальс", ja: "ワルツ", zh: "圆舞曲", ko: "왈츠" },
     "Piano": { tr: "Piyano", en: "Piano", de: "Klavier", fr: "Piano", es: "Piano", it: "Pianoforte", pt: "Piano", pl: "Fortepian", ru: "Фортепиано", ja: "ピアノ", zh: "钢琴", ko: "피아노" },
+    "C major": { tr: "Do majör", en: "C major", de: "C-Dur", fr: "Do majeur", es: "Do mayor", it: "Do maggiore", pt: "Dó maior", pl: "C-dur", ru: "до мажор", ja: "ハ長調", zh: "C大调", ko: "다장조" },
+    "Prelude": { tr: "Prelüd", en: "Prelude", de: "Präludium", fr: "Prélude", es: "Preludio", it: "Preludio", pt: "Prelúdio", pl: "Preludium", ru: "Прелюдия", ja: "前奏曲", zh: "前奏曲", ko: "전주곡" },
     "Melankolik": { en: "Melancholic", de: "Melancholisch", fr: "Mélancolique", es: "Melancólico", it: "Malinconico", pt: "Melancólico", pl: "Melancholijny", ru: "Меланхоличное", ja: "メランコリック", zh: "忧郁", ko: "우울한" },
   };
   const lang = () => Dil.lang;   // seçili dil ortak menüden (js/dil.js)
@@ -412,7 +434,7 @@
         <div class="rq-col">
           ${d ? `<p class="rq-desc">${esc(d)}</p>` : ""}
           <dl class="rq-info-list">${info}</dl>
-          ${w.lisans ? `<p class="rq-lic">${esc(L.lic)}</p>` : ""}
+          ${licText(w.lisans) ? `<p class="rq-lic">${esc(licText(w.lisans))}</p>` : ""}
           ${plats ? `<div class="rq-block"><h4>${esc(L.listen)}</h4><div class="rq-chips">${plats}</div></div>` : ""}
         </div>
         <div class="rq-col">

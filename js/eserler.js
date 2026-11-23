@@ -68,7 +68,7 @@ window.SANATCILAR = [
       "youtube": "",
       "imslp": "https://imslp.org/wiki/Category:Bach,_Johann_Sebastian"
     },
-    "eserSayisi": 0
+    "eserSayisi": 1
   }
 ];
 window.WORKS = [
@@ -175,6 +175,52 @@ window.WORKS = [
       "spotify": "https://open.spotify.com/intl-tr/track/1ZglqmqeaoZSXoxN41sgcD?si=324606195c344270",
       "appleMusic": "https://music.apple.com/tr/song/out-of-time-op-3/6820691969",
       "imslp": "https://imslp.org/wiki/User:Echo_Requiem"
+    }
+  },
+  {
+    "id": "bwv846-prelude",
+    "sanatci": "bach",
+    "baslik": "Prelude in C major",
+    "opus": "BWV 846",
+    "yil": 1722,
+    "calgi": "Piano",
+    "ton": "C major",
+    "tur": "Prelude",
+    "sure": "01:40",
+    "lisans": "CC BY-SA 4.0",
+    "aciklama": {
+      "tr": "Das Wohltemperierte Klavier (İyi Düzenlenmiş Klavye) I. kitabının açılış prelüdü. Echo Requiem Edition: Echo Requiem tarafından düzenlendi ve notaya alındı.",
+      "en": "The opening prelude of The Well-Tempered Clavier, Book I. Echo Requiem Edition: edited and engraved by Echo Requiem.",
+      "de": "Das Eröffnungspräludium des Wohltemperierten Klaviers, Teil I. Echo Requiem Edition: herausgegeben und gesetzt von Echo Requiem.",
+      "fr": "Le prélude d'ouverture du Clavier bien tempéré, livre I. Echo Requiem Edition : édition et gravure par Echo Requiem.",
+      "es": "El preludio inicial de El clave bien temperado, libro I. Echo Requiem Edition: edición y grabado de Echo Requiem.",
+      "it": "Il preludio d'apertura del Clavicembalo ben temperato, libro I. Echo Requiem Edition: curata e incisa da Echo Requiem.",
+      "pt": "O prelúdio de abertura de O Cravo Bem Temperado, livro I. Echo Requiem Edition: edição e gravação de Echo Requiem.",
+      "pl": "Preludium otwierające Das Wohltemperierte Klavier, tom I. Echo Requiem Edition: opracowanie i skład nutowy Echo Requiem.",
+      "ru": "Вступительная прелюдия «Хорошо темперированного клавира», том I. Echo Requiem Edition: редакция и нотный набор Echo Requiem.",
+      "ja": "『平均律クラヴィーア曲集』第1巻の冒頭を飾るプレリュード。Echo Requiem Edition：Echo Requiem による校訂・浄書。",
+      "zh": "《平均律钢琴曲集》第一卷的开篇前奏曲。Echo Requiem Edition：由 Echo Requiem 校订并制谱。",
+      "ko": "《평균율 클라비어곡집》 제1권의 첫 프렐류드. Echo Requiem Edition: Echo Requiem 교정·사보."
+    },
+    "dosya": {
+      "mp3": "eserler/bach/bwv846-prelude/ses.mp3",
+      "flac": "eserler/bach/bwv846-prelude/ses.flac",
+      "wav": "eserler/bach/bwv846-prelude/ses.wav",
+      "nota": "eserler/bach/bwv846-prelude/nota.pdf",
+      "kapak": "eserler/bach/bwv846-prelude/kapak.jpg"
+    },
+    "boyut": {
+      "mp3": 2394323,
+      "flac": 4043592,
+      "wav": 35171382,
+      "nota": 401810
+    },
+    "videolar": [],
+    "baglantilar": {
+      "youtube": "",
+      "spotify": "",
+      "appleMusic": "",
+      "imslp": "https://imslp.org/wiki/Prelude_and_Fugue_in_C_major,_BWV_846_(Bach,_Johann_Sebastian)"
     }
   }
 ];
