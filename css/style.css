@@ -1240,7 +1240,7 @@ body.has-player .ap-scroll { padding-bottom: 150px; }
 .ap-meta span { padding: 6px 12px; border-radius: 999px; font-size: 13px; color: var(--muted); background: var(--chip); }
 .ap-meta .ap-badge { position: static; }
 
-.ap-dls { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
+.ap-dls { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin-top: 34px; max-width: 1040px; }
 .ap-dl {
   display: inline-flex; align-items: center; gap: 14px; padding: 14px 26px 14px 20px; border-radius: 20px;
   color: var(--text); background: color-mix(in srgb, var(--c) 26%, var(--chip));
@@ -1255,6 +1255,18 @@ body.has-player .ap-scroll { padding-bottom: 150px; }
 .ap-dl span { display: flex; flex-direction: column; }
 .ap-dl b { font-size: 16px; font-weight: 600; }
 .ap-dl small { font-size: 12.5px; color: var(--muted); }
+/* işletim sistemi butonları: logolu, sistemin renginde; dosyası olmayan soluk ve tıklanamaz */
+.ap-dl[class*="os-"] { --c: var(--os); padding: 12px 20px 12px 12px; }
+.ap-dl.os-windows { --os: #0078D4; }
+.ap-dl.os-macos { --os: #A2AAAD; }
+.ap-dl.os-linux { --os: #FCC624; }
+.ap-dl > svg { margin-left: auto; opacity: .75; }
+.ap-os { display: block; width: 40px; height: 40px; flex: none; }
+.ap-os svg { width: 40px; height: 40px; display: block; stroke: none; }
+.ap-dl.off { cursor: default; opacity: .5; background: var(--chip); box-shadow: inset 0 0 0 1px var(--chip-2); }
+.ap-dl.off .ap-os { filter: grayscale(1); }
+.ap-dl.off:hover { background: var(--chip); }
+.ap-dl.off:active { transform: none; }
 .ap-nodl { padding: 16px 20px; border-radius: 18px; background: var(--chip); color: var(--muted); font-size: 15px; border-left: 2px solid color-mix(in srgb, var(--ink) 55%, transparent); }
 
 .ap-cols { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 34px 56px; margin-top: 40px; padding-top: 32px; border-top: 1px solid var(--chip-2); }

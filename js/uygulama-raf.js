@@ -46,6 +46,20 @@
     check: '<svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',
   };
 
+  // işletim sistemleri: her uygulama sayfasında üçü de gösterilir; dosyası olmayan "Mevcut değil" olur
+  // (araclar/sayfalari-uret.js içinde aynısı var)
+  const OS = [
+    { id: "windows", ad: "Windows", re: /windows|\.exe$|\.msi$/i,
+      svg: '<svg viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="10" fill="#0078D4"/><path fill="#fff" d="M10 10h9.2v9.2H10zM20.8 10H30v9.2h-9.2zM10 20.8h9.2V30H10zM20.8 20.8H30V30h-9.2z"/></svg>' },
+    { id: "macos", ad: "macOS", re: /mac|\.dmg$|\.pkg$/i,
+      svg: '<svg viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="10" fill="#ECECEF"/><g fill="#1D1D1F" transform="translate(8 7.6) scale(1.02)"><path d="M16.5 12.6c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.1-2.8.9-3.5.9-.7 0-1.8-.8-3-.8-1.6 0-3 .9-3.8 2.3-1.6 2.8-.4 6.9 1.2 9.1.8 1.1 1.7 2.3 2.9 2.3 1.2 0 1.6-.7 3-.7s1.8.7 3 .7c1.3 0 2.1-1.1 2.8-2.2.9-1.3 1.3-2.5 1.3-2.6 0 0-2.5-1-2.5-3.7zM14.2 5.8c.6-.8 1.1-1.8 1-2.8-.9 0-2 .6-2.7 1.4-.6.7-1.1 1.7-1 2.7 1 .1 2-.5 2.7-1.3z"/></g></svg>' },
+    { id: "linux", ad: "Linux", re: /linux|appimage|\.deb$|\.rpm$/i,
+      svg: '<svg viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="10" fill="#FCC624"/><ellipse cx="20" cy="23.5" rx="7.6" ry="9" fill="#1D1D1F"/><circle cx="20" cy="13" r="5.4" fill="#1D1D1F"/><ellipse cx="20" cy="25" rx="4.9" ry="6.6" fill="#fff"/><circle cx="18.1" cy="12.2" r="1.35" fill="#fff"/><circle cx="21.9" cy="12.2" r="1.35" fill="#fff"/><circle cx="18.3" cy="12.4" r=".6" fill="#1D1D1F"/><circle cx="21.7" cy="12.4" r=".6" fill="#1D1D1F"/><ellipse cx="20" cy="15.4" rx="2.3" ry="1.1" fill="#F08A00"/><ellipse cx="15.4" cy="32.4" rx="3.3" ry="1.5" fill="#F08A00"/><ellipse cx="24.6" cy="32.4" rx="3.3" ry="1.5" fill="#F08A00"/></svg>' },
+  ];
+  const NA = { tr: "Mevcut değil", en: "Not available", de: "Nicht verfügbar", fr: "Non disponible", es: "No disponible", it: "Non disponibile",
+    pt: "Indisponível", pl: "Niedostępne", ru: "Недоступно", ja: "利用不可", zh: "暂不可用", ko: "이용 불가" };
+  const osOf = (d) => (d.os ? OS.find((o) => o.id === d.os) : OS.find((o) => o.re.test(`${P(d.ad) || ""} ${d.baglanti || ""}`)));
+
   let root = null, family = null, page = null, openId = "";
 
   /* ---------------- Raf: kare paneller ---------------- */
@@ -100,10 +114,17 @@
 
   function fill(a) {
     const L = t();
-    const dls = a.indirmeler.map((d, k) => `
-      <a class="ap-dl${k ? " ghost" : ""}" href="${esc(d.baglanti)}" ${d.yerel ? `download` : `target="_blank" rel="noopener"`}>
-        ${ICON.down}<span><b>${esc(L.download)}</b><small>${esc([P(d.ad), mb(d.boyut)].filter(Boolean).join(" · "))}</small></span>
-      </a>`).join("");
+    const btn = (d, o) => `
+      <a class="ap-dl${o ? ` os-${o.id}` : ""}"${o ? ` aria-label="${esc(`${L.download} · ${o.ad} · ${P(d.ad)}`)}"` : ""} href="${esc(d.baglanti)}" ${d.yerel ? `download` : `target="_blank" rel="noopener"`}>
+        ${o ? `<i class="ap-os">${o.svg}</i>` : ""}<span><b>${esc(o ? o.ad : L.download)}</b><small>${esc([P(d.ad), mb(d.boyut)].filter(Boolean).join(" · "))}</small></span>${ICON.down}
+      </a>`;
+    const dls = OS.map((o) => {
+      const d = a.indirmeler.find((x) => osOf(x) === o);
+      return d ? btn(d, o) : `
+      <div class="ap-dl off os-${o.id}" aria-disabled="true">
+        <i class="ap-os">${o.svg}</i><span><b>${esc(o.ad)}</b><small>${esc(NA[Dil.lang] || NA.en)}</small></span>
+      </div>`;
+    }).join("") + a.indirmeler.filter((d) => !osOf(d)).map((d) => btn(d, null)).join("");
     const feats = (a.ozellikler || []).map(P).filter(Boolean);
     const notes = (a.surumNotlari || []).map((n) => {
       const items = [].concat(P(n.notlar) || []).map(P).filter(Boolean);
@@ -125,7 +146,7 @@
           <div class="ap-meta">${meta}</div>
         </div>
       </header>
-      <div class="ap-dls">${dls || `<p class="ap-nodl">${esc(L.noDl)}</p>`}</div>
+      <div class="ap-dls">${dls}</div>
       <div class="ap-cols">
         <div class="ap-col">
           ${P(a.aciklama) ? `<div class="rq-block"><h4>${esc(L.about)}</h4><p class="ap-desc">${esc(P(a.aciklama))}</p></div>` : ""}

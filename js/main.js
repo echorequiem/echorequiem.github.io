@@ -692,7 +692,7 @@
     const el = e.target.closest && e.target.closest("a, button");
     if (!el) return;
     if (el.matches(".ap-tile")) Sfx.drop(panAt(el));
-    else if (el.matches("[download], .ap-dl")) Sfx.success();
+    else if (el.matches("[download], a.ap-dl")) Sfx.success();
     else if (el.matches(UI_TAP)) Sfx.tap(panAt(el));
   }, true);
   let hoverEl = null;
