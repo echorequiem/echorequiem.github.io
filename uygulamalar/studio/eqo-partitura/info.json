@@ -1,6 +1,8 @@
 {
   "ad": "Eqo Partitura",
-  "eskiKimlikler": ["partitura"],
+  "eskiKimlikler": [
+    "partitura"
+  ],
   "sira": 1,
   "kisa": {
     "tr": "Nota animasyonu",
@@ -31,9 +33,13 @@
     "ko": "MusicXML 악보를 연주되는 음표가 원하는 색으로 빛나는 스크롤 악보 영상으로 바꿉니다. 배경 이미지나 영상, 음악 트랙, 오프닝 / 엔딩 화면을 추가할 수 있으며, 결과는 프레임 단위로 MP4 또는 WebM(최대 4K)으로 내보냅니다. 인터넷 연결이 필요 없고 모든 것이 내 컴퓨터에 남습니다."
   },
   "durum": "Yayında",
-  "surum": "1.0.0",
-  "tarih": "2026-11-20",
-  "platformlar": ["Windows 10 / 11", "Linux", "x64 (64-bit)"],
+  "surum": "1.1.0",
+  "tarih": "2026-11-24",
+  "platformlar": [
+    "Windows 10 / 11",
+    "Linux",
+    "x64 (64-bit)"
+  ],
   "gereksinimler": {
     "tr": "Windows 10 veya 11, 64-bit (x64) ya da güncel bir Linux dağıtımı (x86_64, AppImage) · 4 GB RAM (4K için 8 GB önerilir) · ~130 MB disk alanı + videolar için yer · Kurulum gerekmez, tek dosya. Windows ARM'da emülasyonla çalışır. Linux'ta dosyaya önce çalıştırma izni verin (chmod +x).",
     "en": "Windows 10 or 11, 64-bit (x64), or a current Linux distribution (x86_64, AppImage) · 4 GB RAM (8 GB recommended for 4K) · ~130 MB disk space + room for your videos · No installation, a single file. Runs on Windows on ARM through emulation. On Linux, make the file executable first (chmod +x).",
@@ -78,6 +84,34 @@
       "ja": "鳴っている音符は自分の長さだけ光り、トリルはきらめき、スラーは水のように流れます",
       "zh": "正在发声的音符按其时值发光；颤音闪烁，连线如流水般流动",
       "ko": "연주되는 음표는 자기 길이만큼 빛나고, 트릴은 반짝이며, 이음줄은 물처럼 흐릅니다"
+    },
+    {
+      "tr": "Piyano klavyesi: çalan notaların tuşları videonun altında parlama renginde basılır",
+      "en": "Piano keyboard: the keys of the sounding notes are pressed in the glow colour along the bottom of the video",
+      "de": "Klaviatur: Die Tasten der klingenden Noten werden am unteren Videorand in der Leuchtfarbe gedrückt",
+      "fr": "Clavier de piano : les touches des notes jouées s'enfoncent dans la couleur choisie en bas de la vidéo",
+      "es": "Teclado de piano: las teclas de las notas que suenan se pulsan con el color de brillo en la parte inferior del vídeo",
+      "it": "Tastiera di pianoforte: i tasti delle note suonate si abbassano nel colore scelto nella parte inferiore del video",
+      "pt": "Teclado de piano: as teclas das notas tocadas são pressionadas na cor do brilho na parte inferior do vídeo",
+      "pl": "Klawiatura fortepianu: klawisze granych nut są wciskane w kolorze poświaty u dołu filmu",
+      "ru": "Клавиатура фортепиано: клавиши звучащих нот нажимаются цветом подсветки в нижней части видео",
+      "ja": "ピアノ鍵盤：鳴っている音符の鍵が、動画の下部で光の色で押されます",
+      "zh": "钢琴键盘：正在发声的音符对应的琴键会在视频底部以发光颜色按下",
+      "ko": "피아노 건반: 울리는 음표의 건반이 영상 아래쪽에서 빛 색상으로 눌립니다"
+    },
+    {
+      "tr": "Görünüm şablonları, geri al / yinele, otomatik kayıt ve tap tempo",
+      "en": "Look templates, undo / redo, autosave and tap tempo",
+      "de": "Design-Vorlagen, Rückgängig / Wiederholen, automatisches Speichern und Tap-Tempo",
+      "fr": "Modèles d'apparence, annuler / rétablir, enregistrement automatique et tap tempo",
+      "es": "Plantillas de aspecto, deshacer / rehacer, guardado automático y tap tempo",
+      "it": "Modelli di aspetto, annulla / ripeti, salvataggio automatico e tap tempo",
+      "pt": "Modelos de aparência, desfazer / refazer, salvamento automático e tap tempo",
+      "pl": "Szablony wyglądu, cofanie / ponawianie, autozapis i tap tempo",
+      "ru": "Шаблоны оформления, отмена / повтор, автосохранение и tap tempo",
+      "ja": "外観テンプレート、元に戻す／やり直し、自動保存、タップテンポ",
+      "zh": "外观模板、撤销 / 重做、自动保存和点击测速",
+      "ko": "외형 템플릿, 실행 취소 / 다시 실행, 자동 저장, 탭 템포"
     },
     {
       "tr": "MP4 (H.264 + AAC) veya WebM (VP9 + Opus) · 720p'den 4K'ya · 24–120 fps · 16:9, 9:16, 1:1, 4:3, 4:5",
@@ -140,15 +174,105 @@
     {
       "ad": "Windows 10 / 11 · x64",
       "baglanti": "https://github.com/echorequiem/eqo-partitura/releases/latest/download/Eqo-Partitura.exe",
-      "boyut": 123538180
+      "boyut": 122453155
     },
     {
       "ad": "Linux · x86_64 · AppImage",
       "baglanti": "https://github.com/echorequiem/eqo-partitura/releases/latest/download/Eqo-Partitura-x86_64.AppImage",
-      "boyut": 131077522
+      "boyut": 129921426
     }
   ],
   "surumNotlari": [
+    {
+      "surum": "1.1.0",
+      "tarih": "2026-11-24",
+      "notlar": {
+        "tr": [
+          "Piyano klavyesi: çalan notaların tuşları videonun altında parlama renginde basılır",
+          "Görünüm şablonları, geri al / yinele, otomatik kayıt ve tap tempo",
+          "Yeni render animasyonu; görev çubuğunda ilerleme ve video hazır olunca Windows bildirimi",
+          "Yeni logo, yeni açılış ekranı ve beş adımlı sade arayüz",
+          "Notadaki rit., rall., accel. ve a tempo artık tempoyu değiştirir"
+        ],
+        "en": [
+          "Piano keyboard: the keys of the sounding notes are pressed in the glow colour along the bottom of the video",
+          "Look templates, undo / redo, autosave and tap tempo",
+          "New render animation; progress on the taskbar and a Windows notification when the video is ready",
+          "New logo, new splash screen and a clean five-step interface",
+          "rit., rall., accel. and a tempo in the score now change the tempo"
+        ],
+        "de": [
+          "Klaviatur: Die Tasten der klingenden Noten werden am unteren Videorand in der Leuchtfarbe gedrückt",
+          "Design-Vorlagen, Rückgängig / Wiederholen, automatisches Speichern und Tap-Tempo",
+          "Neue Render-Animation; Fortschritt in der Taskleiste und Windows-Benachrichtigung, wenn das Video fertig ist",
+          "Neues Logo, neuer Startbildschirm und eine klare Oberfläche in fünf Schritten",
+          "rit., rall., accel. und a tempo in der Partitur ändern jetzt das Tempo"
+        ],
+        "fr": [
+          "Clavier de piano : les touches des notes jouées s'enfoncent dans la couleur choisie en bas de la vidéo",
+          "Modèles d'apparence, annuler / rétablir, enregistrement automatique et tap tempo",
+          "Nouvelle animation de rendu ; progression dans la barre des tâches et notification Windows quand la vidéo est prête",
+          "Nouveau logo, nouvel écran de démarrage et interface épurée en cinq étapes",
+          "Les rit., rall., accel. et a tempo de la partition modifient désormais le tempo"
+        ],
+        "es": [
+          "Teclado de piano: las teclas de las notas que suenan se pulsan con el color de brillo en la parte inferior del vídeo",
+          "Plantillas de aspecto, deshacer / rehacer, guardado automático y tap tempo",
+          "Nueva animación de renderizado; progreso en la barra de tareas y notificación de Windows cuando el vídeo está listo",
+          "Nuevo logotipo, nueva pantalla de inicio e interfaz limpia en cinco pasos",
+          "Los rit., rall., accel. y a tempo de la partitura ahora cambian el tempo"
+        ],
+        "it": [
+          "Tastiera di pianoforte: i tasti delle note suonate si abbassano nel colore scelto nella parte inferiore del video",
+          "Modelli di aspetto, annulla / ripeti, salvataggio automatico e tap tempo",
+          "Nuova animazione di rendering; avanzamento nella barra delle applicazioni e notifica di Windows a video pronto",
+          "Nuovo logo, nuova schermata di avvio e interfaccia pulita in cinque passaggi",
+          "I rit., rall., accel. e a tempo dello spartito ora modificano il tempo"
+        ],
+        "pt": [
+          "Teclado de piano: as teclas das notas tocadas são pressionadas na cor do brilho na parte inferior do vídeo",
+          "Modelos de aparência, desfazer / refazer, salvamento automático e tap tempo",
+          "Nova animação de renderização; progresso na barra de tarefas e notificação do Windows quando o vídeo fica pronto",
+          "Novo logotipo, nova tela de abertura e interface limpa em cinco etapas",
+          "rit., rall., accel. e a tempo da partitura agora alteram o andamento"
+        ],
+        "pl": [
+          "Klawiatura fortepianu: klawisze granych nut są wciskane w kolorze poświaty u dołu filmu",
+          "Szablony wyglądu, cofanie / ponawianie, autozapis i tap tempo",
+          "Nowa animacja renderowania; postęp na pasku zadań i powiadomienie Windows, gdy film jest gotowy",
+          "Nowe logo, nowy ekran startowy i przejrzysty interfejs w pięciu krokach",
+          "rit., rall., accel. i a tempo w nutach zmieniają teraz tempo"
+        ],
+        "ru": [
+          "Клавиатура фортепиано: клавиши звучащих нот нажимаются цветом подсветки в нижней части видео",
+          "Шаблоны оформления, отмена / повтор, автосохранение и tap tempo",
+          "Новая анимация рендера; прогресс на панели задач и уведомление Windows, когда видео готово",
+          "Новый логотип, новая заставка и простой интерфейс из пяти шагов",
+          "rit., rall., accel. и a tempo в нотах теперь меняют темп"
+        ],
+        "ja": [
+          "ピアノ鍵盤：鳴っている音符の鍵が、動画の下部で光の色で押されます",
+          "外観テンプレート、元に戻す／やり直し、自動保存、タップテンポ",
+          "新しいレンダーアニメーション。タスクバーに進行状況を表示し、動画の完成を Windows 通知でお知らせ",
+          "新しいロゴ、新しい起動画面、5 ステップのすっきりした画面",
+          "楽譜中の rit.、rall.、accel.、a tempo がテンポに反映されるようになりました"
+        ],
+        "zh": [
+          "钢琴键盘：正在发声的音符对应的琴键会在视频底部以发光颜色按下",
+          "外观模板、撤销 / 重做、自动保存和点击测速",
+          "全新渲染动画；任务栏显示进度，视频完成时发送 Windows 通知",
+          "全新标志、全新启动画面和简洁的五步界面",
+          "乐谱中的 rit.、rall.、accel. 和 a tempo 现在会改变速度"
+        ],
+        "ko": [
+          "피아노 건반: 울리는 음표의 건반이 영상 아래쪽에서 빛 색상으로 눌립니다",
+          "외형 템플릿, 실행 취소 / 다시 실행, 자동 저장, 탭 템포",
+          "새로운 렌더 애니메이션. 작업 표시줄에 진행률 표시, 영상이 완성되면 Windows 알림",
+          "새 로고, 새 시작 화면, 다섯 단계의 깔끔한 인터페이스",
+          "악보의 rit., rall., accel., a tempo가 이제 템포에 반영됩니다"
+        ]
+      }
+    },
     {
       "surum": "1.0.0",
       "tarih": "2026-11-20",

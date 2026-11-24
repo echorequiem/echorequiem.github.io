@@ -1,5 +1,4 @@
 # Yerel araç ayarları (sitede gerekmez)
-.claude/
 .vite/
 node_modules/
 
