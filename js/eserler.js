@@ -68,7 +68,7 @@ window.SANATCILAR = [
       "youtube": "",
       "imslp": "https://imslp.org/wiki/Category:Bach,_Johann_Sebastian"
     },
-    "eserSayisi": 1
+    "eserSayisi": 2
   }
 ];
 window.WORKS = [
@@ -222,6 +222,54 @@ window.WORKS = [
     ],
     "baglantilar": {
       "youtube": "https://youtu.be/B7juPYNXj1U",
+      "spotify": "",
+      "appleMusic": "",
+      "imslp": "https://imslp.org/wiki/Prelude_and_Fugue_in_C_major,_BWV_846_(Bach,_Johann_Sebastian)"
+    }
+  },
+  {
+    "id": "bwv846-fugue",
+    "sanatci": "bach",
+    "baslik": "Fugue in C major",
+    "opus": "BWV 846",
+    "yil": 1722,
+    "calgi": "Piano",
+    "ton": "C major",
+    "tur": "Fugue",
+    "sure": "00:58",
+    "lisans": "CC BY-SA 4.0",
+    "aciklama": {
+      "tr": "Das Wohltemperierte Klavier (İyi Düzenlenmiş Klavye) I. kitabının ilk fügü; dört sesli. Echo Requiem Edition: Echo Requiem tarafından düzenlendi ve notaya alındı.",
+      "en": "The first fugue of The Well-Tempered Clavier, Book I, for four voices. Echo Requiem Edition: edited and engraved by Echo Requiem.",
+      "de": "Die erste Fuge des Wohltemperierten Klaviers, Teil I, zu vier Stimmen. Echo Requiem Edition: herausgegeben und gesetzt von Echo Requiem.",
+      "fr": "La première fugue du Clavier bien tempéré, livre I, à quatre voix. Echo Requiem Edition : édition et gravure par Echo Requiem.",
+      "es": "La primera fuga de El clave bien temperado, libro I, a cuatro voces. Echo Requiem Edition: edición y grabado de Echo Requiem.",
+      "it": "La prima fuga del Clavicembalo ben temperato, libro I, a quattro voci. Echo Requiem Edition: curata e incisa da Echo Requiem.",
+      "pt": "A primeira fuga de O Cravo Bem Temperado, livro I, a quatro vozes. Echo Requiem Edition: edição e gravação de Echo Requiem.",
+      "pl": "Pierwsza fuga z Das Wohltemperierte Klavier, tom I, czterogłosowa. Echo Requiem Edition: opracowanie i skład nutowy Echo Requiem.",
+      "ru": "Первая фуга «Хорошо темперированного клавира», том I, четырёхголосная. Echo Requiem Edition: редакция и нотный набор Echo Requiem.",
+      "ja": "『平均律クラヴィーア曲集』第1巻の最初のフーガ（4声）。Echo Requiem Edition：Echo Requiem による校訂・浄書。",
+      "zh": "《平均律钢琴曲集》第一卷的第一首赋格，四声部。Echo Requiem Edition：由 Echo Requiem 校订并制谱。",
+      "ko": "《평균율 클라비어곡집》 제1권의 첫 푸가(4성). Echo Requiem Edition: Echo Requiem 교정·사보."
+    },
+    "dosya": {
+      "mp3": "eserler/bach/bwv846-fugue/ses.mp3",
+      "flac": "eserler/bach/bwv846-fugue/ses.flac",
+      "wav": "eserler/bach/bwv846-fugue/ses.wav",
+      "nota": "eserler/bach/bwv846-fugue/nota.pdf",
+      "kapak": "eserler/bach/bwv846-fugue/kapak.jpg"
+    },
+    "boyut": {
+      "mp3": 1394982,
+      "flac": 2599676,
+      "wav": 20483966,
+      "nota": 389817
+    },
+    "videolar": [
+      "UDjS3iQUCms"
+    ],
+    "baglantilar": {
+      "youtube": "https://youtu.be/UDjS3iQUCms",
       "spotify": "",
       "appleMusic": "",
       "imslp": "https://imslp.org/wiki/Prelude_and_Fugue_in_C_major,_BWV_846_(Bach,_Johann_Sebastian)"
